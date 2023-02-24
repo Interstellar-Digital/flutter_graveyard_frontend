@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_graveyard_frontend/login_page.dart';
+import 'package:flutter_graveyard_frontend/main_content.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -22,34 +23,33 @@ class DashboardPage extends StatelessWidget {
         ],
       ),
       body: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            width: MediaQuery.of(context).size.width * 0.2,
-            color: Colors.blue,
-            child: ListView(
-              children: [
-                ListTile(
-                  title: const Text('Dashboard'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: const Text('Graveyards'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: const Text('Sales'),
-                  onTap: () {},
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Container(
-              color: Colors.white,
-              child: const Center(
-                child: Text('Main Content'),
+          Flexible(
+            flex: 1,
+            child: Drawer(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  ListTile(
+                    title: const Text('Dashboard'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: const Text('Graveyards'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    title: const Text('Sales'),
+                    onTap: () {},
+                  ),
+                ],
               ),
             ),
+          ),
+          Flexible(
+            flex: 4,
+            child: MainContent(),
           ),
         ],
       ),
