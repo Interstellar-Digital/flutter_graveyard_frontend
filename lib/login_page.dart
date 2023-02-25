@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_graveyard_frontend/graveyard_list.dart';
+import 'package:provider/provider.dart';
+import 'user_provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -68,12 +69,12 @@ class LoginPageState extends State<LoginPage> {
     final loginButton = Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const GraveyardSelectionPage()),
-          );
+        onPressed: () async {
+          final userProvider =
+          Provider.of<UserProvider>(context, listen: false);
+          final username = _usernameController.text;
+          final password = _passwordController.text;
+          await userProvider.login(username, password, context);
         },
         child: const Text('Log In'),
       ),
