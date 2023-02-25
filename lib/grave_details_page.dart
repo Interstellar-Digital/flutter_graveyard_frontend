@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'graves.dart';
 
 class GraveDetailsPage extends StatelessWidget {
   final Map<String, dynamic> grave;

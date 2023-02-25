@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'graves.dart';
 import 'grave_details_page.dart';
 
-
 class MainContent extends StatelessWidget {
-  const MainContent({super.key});
+  final Map<String, dynamic>? selectedGraveyard;
+
+  const MainContent({Key? key, required this.selectedGraveyard})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,32 +23,58 @@ class MainContent extends StatelessWidget {
       crossAxisCount = 4;
     }
 
-    return GridView.builder(
-      itemCount: graves.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-        childAspectRatio: 2 / 1,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Graves in ${selectedGraveyard?['name']}'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
-      itemBuilder: (BuildContext context, int index) {
-        final grave = graves[index];
-
-        return GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => GraveDetailsPage(grave: grave),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'Graves in ${selectedGraveyard?['name']}',
+              style: const TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
               ),
-            );
-          },
-          child: Card(
-            child: ListTile(
-              title: Text(grave['grave_name']),
-              subtitle: Text('ID: ${grave['id']}, Status: ${grave['status']}'),
             ),
           ),
-        );
-      },
+          Expanded(
+            child: GridView.builder(
+              itemCount: graves.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                childAspectRatio: 2 / 1,
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                final grave = graves[index];
+
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GraveDetailsPage(grave: grave),
+                      ),
+                    );
+                  },
+                  child: Card(
+                    child: ListTile(
+                      title: Text(grave['grave_name']),
+                      subtitle: Text(
+                          'ID: ${grave['id']}, Status: ${grave['status']}'),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

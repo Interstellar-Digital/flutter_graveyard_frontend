@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_graveyard_frontend/dashboard_page.dart';
+import 'package:flutter_graveyard_frontend/graveyard_list.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -9,10 +9,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-  final TextEditingController _usernameController =
-  TextEditingController();
-  final TextEditingController _passwordController =
-  TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   bool _obscurePassword = true;
 
@@ -73,7 +71,8 @@ class LoginPageState extends State<LoginPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const DashboardPage()),
+            MaterialPageRoute(
+                builder: (context) => const GraveyardSelectionPage()),
           );
         },
         child: const Text('Log In'),

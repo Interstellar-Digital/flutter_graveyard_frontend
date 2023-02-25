@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_graveyard_frontend/login_page.dart';
 import 'package:flutter_graveyard_frontend/main_content.dart';
+import 'package:flutter_graveyard_frontend/graveyard_list.dart';
 
 class DashboardPage extends StatelessWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+  final Map<String, dynamic>? selectedGraveyard;
+
+  const DashboardPage({Key? key, required this.selectedGraveyard})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +53,9 @@ class DashboardPage extends StatelessWidget {
           ),
           Flexible(
             flex: 4,
-            child: MainContent(),
+            child: selectedGraveyard != null
+                ? MainContent(selectedGraveyard: selectedGraveyard)
+                : const GraveyardSelectionPage(),
           ),
         ],
       ),
