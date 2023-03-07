@@ -14,5 +14,10 @@ final List<Map<String, dynamic>> graveyards = [
     'name': 'Mount Auburn Cemetery',
     'location': 'Cambridge, MA',
   },
+  {
+    'id': '4',
+    'name': 'Tunapuna Cemtery',
+    'location': 'St.George, Tunapuna'
+  }
   // ... add more dummy data here ...
 ];
