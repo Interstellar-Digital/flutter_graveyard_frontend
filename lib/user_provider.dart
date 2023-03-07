@@ -15,10 +15,7 @@ class UserProvider with ChangeNotifier {
     if (dummyUser != null) {
       _user = dummyUser;
       notifyListeners();
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const GraveyardSelectionPage()),
-      );
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const GraveyardSelectionPage()),  (route) => false);
     } else {
       showDialog(
         context: context,
