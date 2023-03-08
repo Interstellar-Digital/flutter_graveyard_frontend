@@ -44,6 +44,6 @@ class UserProvider with ChangeNotifier {
   // dummy user data
   final List<User?> _dummyUsers = [
     User(id: userData[0]['userid'], username: userData[0]['username'], password: userData[0]['password'], role: userData[0]['role']),
-    User(id: userData[0]['userid'], username: userData[0]['username'], password: userData[0]['password'], role: userData[0]['role']),
+    User(id: userData[1]['userid'], username: userData[1]['username'], password: userData[1]['password'], role: userData[1]['role']),
   ];
 }
