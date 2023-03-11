@@ -23,13 +23,14 @@ class LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final logo = Padding(
+    final logintext = Padding(
       padding: const EdgeInsets.all(20),
-      child: Hero(
-        tag: 'hero',
-        child: CircleAvatar(
-          radius: 56.0,
-          child: Image.asset('assets/ac-logo.png'),
+      child: Text(
+        'Login',
+        style: TextStyle(
+          fontSize: 40,
+          fontWeight: FontWeight.bold,
+          decoration: TextDecoration.underline,
         ),
       ),
     );
@@ -39,6 +40,8 @@ class LoginPageState extends State<LoginPage> {
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
         hintText: 'Username',
         contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
@@ -52,6 +55,8 @@ class LoginPageState extends State<LoginPage> {
       autofocus: false,
       obscureText: _obscurePassword,
       decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
         hintText: 'Password',
         contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(
@@ -69,9 +74,13 @@ class LoginPageState extends State<LoginPage> {
     final loginButton = Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor:
+              MaterialStatePropertyAll(Color.fromRGBO(147, 198, 231, 1)),
+        ),
         onPressed: () async {
           final userProvider =
-          Provider.of<UserProvider>(context, listen: false);
+              Provider.of<UserProvider>(context, listen: false);
           final username = _usernameController.text;
           final password = _passwordController.text;
           await userProvider.login(username, password, context);
@@ -81,28 +90,54 @@ class LoginPageState extends State<LoginPage> {
     );
 
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(36.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  logo,
-                  const SizedBox(height: 48.0),
-                  username,
-                  const SizedBox(height: 8.0),
-                  password,
-                  const SizedBox(height: 24.0),
-                  loginButton,
-                ],
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom:200),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 100,
+                    color:Color.fromRGBO(174, 226, 255, 1),
+                    child: Row(
+                      children: [
+                        Image.network(
+                            'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/gp_logo.png'),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Center(
+            child: Container(
+              width: 800,
+              height: 500,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(192, 224, 229, 1),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 140),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    logintext,
+                    const SizedBox(height: 48.0),
+                    username,
+                    const SizedBox(height: 8.0),
+                    password,
+                    const SizedBox(height: 24.0),
+                    loginButton,
+                  ],
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
