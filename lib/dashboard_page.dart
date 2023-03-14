@@ -20,7 +20,8 @@ class DashboardPage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              final userProvider = Provider.of<UserProvider>(context, listen: false);
+              final userProvider =
+                  Provider.of<UserProvider>(context, listen: false);
               userProvider.logout();
               Navigator.pushReplacement(
                 context,
@@ -69,7 +70,8 @@ class DashboardPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('Welcome, ${userProvider.user?.username ?? 'Unknown'}'),
+                    Text(
+                        'Welcome, ${userProvider.user?.username ?? 'Unknown'}'),
                     Text('Role: ${userProvider.user?.role ?? 'Unknown'}'),
                   ],
                 ),

@@ -32,8 +32,7 @@ class GraveyardSelectionPage extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: GridView.builder(
-                gridDelegate:
-                const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   childAspectRatio: 1.0,
                   crossAxisSpacing: 10.0,

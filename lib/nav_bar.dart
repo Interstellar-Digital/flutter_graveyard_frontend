@@ -17,7 +17,8 @@ class NavBar extends StatelessWidget with PreferredSizeWidget {
       title: Row(
         children: [
           const Text('Graveyard Management'),
-          const SizedBox(width: 10), // Add some spacing between the title and user info
+          const SizedBox(
+              width: 10), // Add some spacing between the title and user info
           if (userProvider.user != null) ...[
             Text(
               '${userProvider.user?.username} (${userProvider.user?.role})',

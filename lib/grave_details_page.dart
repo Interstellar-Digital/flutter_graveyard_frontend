@@ -18,7 +18,6 @@ class GraveDetailsPage extends StatelessWidget {
           children: [
             Text('ID: ${grave['id']}'),
             Text('Status: ${grave['status']}'),
-
           ],
         ),
       ),

@@ -8,7 +8,11 @@ enum UserRole {
 }
 
 class UserProvider with ChangeNotifier {
-  User _currentUser = User(userID: "userID", username: "username", password: "password", role: "role");
+  User _currentUser = User(
+      userID: "userID",
+      username: "username",
+      password: "password",
+      role: "role");
   final UserRepository _userRepository;
 
   UserProvider(this._userRepository);
@@ -16,8 +20,8 @@ class UserProvider with ChangeNotifier {
   User get currentUser => _currentUser;
 
   Future<void> login(String username, String password) async {
-    final user = await _userRepository.getUserByUsernameAndPassword(
-        username, password);
+    final user =
+        await _userRepository.getUserByUsernameAndPassword(username, password);
     if (user != null) {
       _currentUser = user;
       notifyListeners();
@@ -27,7 +31,11 @@ class UserProvider with ChangeNotifier {
   }
 
   void logout() {
-    _currentUser = User(userID: "userID", username: "username", password: "password", role: "role");
+    _currentUser = User(
+        userID: "userID",
+        username: "username",
+        password: "password",
+        role: "role");
     notifyListeners();
   }
 
@@ -41,7 +49,3 @@ class UserProvider with ChangeNotifier {
     return _currentUser != null && _currentUser.role == UserRole.admin;
   }
 }
-
-
-
-

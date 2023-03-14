@@ -23,8 +23,8 @@ class LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final logintext = Padding(
-      padding: const EdgeInsets.all(20),
+    const logintext = Padding(
+      padding: EdgeInsets.all(20),
       child: Text(
         'Login',
         style: TextStyle(
@@ -74,7 +74,7 @@ class LoginPageState extends State<LoginPage> {
     final loginButton = Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: ElevatedButton(
-        style: ButtonStyle(
+        style: const ButtonStyle(
           backgroundColor:
               MaterialStatePropertyAll(Color.fromRGBO(147, 198, 231, 1)),
         ),
@@ -93,13 +93,13 @@ class LoginPageState extends State<LoginPage> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom:200),
+            padding: const EdgeInsets.only(bottom: 200),
             child: Row(
               children: [
                 Expanded(
                   child: Container(
                     height: 100,
-                    color:Color.fromRGBO(174, 226, 255, 1),
+                    color: const Color.fromRGBO(174, 226, 255, 1),
                     child: Row(
                       children: [
                         Image.network(
@@ -116,7 +116,7 @@ class LoginPageState extends State<LoginPage> {
               width: 800,
               height: 500,
               decoration: BoxDecoration(
-                color: Color.fromRGBO(192, 224, 229, 1),
+                color: const Color.fromRGBO(192, 224, 229, 1),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Padding(

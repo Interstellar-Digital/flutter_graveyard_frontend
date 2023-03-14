@@ -8,14 +8,20 @@ class UserProvider with ChangeNotifier {
 
   User? get user => _user;
 
-  Future<void> login(String username, String password, BuildContext context) async {
+  Future<void> login(
+      String username, String password, BuildContext context) async {
     // replace with your authentication logic
-    final dummyUser = _dummyUsers.firstWhere((user) => user?.username == username && user?.password == password, orElse: () => null);
+    final dummyUser = _dummyUsers.firstWhere(
+        (user) => user?.username == username && user?.password == password,
+        orElse: () => null);
 
     if (dummyUser != null) {
       _user = dummyUser;
       notifyListeners();
-      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const GraveyardSelectionPage()),  (route) => false);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+              builder: (context) => const GraveyardSelectionPage()),
+          (route) => false);
     } else {
       showDialog(
         context: context,
@@ -35,7 +41,6 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-
   void logout() {
     _user = null;
     notifyListeners();
@@ -43,7 +48,15 @@ class UserProvider with ChangeNotifier {
 
   // dummy user data
   final List<User?> _dummyUsers = [
-    User(id: userData[0]['userid'], username: userData[0]['username'], password: userData[0]['password'], role: userData[0]['role']),
-    User(id: userData[1]['userid'], username: userData[1]['username'], password: userData[1]['password'], role: userData[1]['role']),
+    User(
+        id: userData[0]['userid'],
+        username: userData[0]['username'],
+        password: userData[0]['password'],
+        role: userData[0]['role']),
+    User(
+        id: userData[1]['userid'],
+        username: userData[1]['username'],
+        password: userData[1]['password'],
+        role: userData[1]['role']),
   ];
 }

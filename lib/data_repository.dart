@@ -1,11 +1,13 @@
 import 'package:flutter_graveyard_frontend/data_models.dart';
+
 class UserRepository {
   Future<User?> getUserById(int userId) async {
     // code to retrieve a user with the given id from the database
     return null;
   }
 
-  Future<User?> getUserByUsernameAndPassword(String username, String password) async {
+  Future<User?> getUserByUsernameAndPassword(
+      String username, String password) async {
     // code to retrieve a user with the given username and password from the database
 
     return null;
