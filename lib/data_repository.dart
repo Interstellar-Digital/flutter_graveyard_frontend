@@ -1,4 +1,4 @@
-import 'package:flutter_graveyard_frontend/data_models.dart';
+import 'package:flutter_graveyard_frontend/models/billingInformation_model.dart';
 
 class UserRepository {
   Future<User?> getUserById(int userId) async {
