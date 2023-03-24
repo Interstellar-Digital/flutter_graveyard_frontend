@@ -1,4 +1,4 @@
-import 'package:flutter_graveyard_frontend/models/user.dart';
+import 'package:flutter_graveyard_frontend/models/user_model.dart';
 
 class UserRepository {
   Future<User?> getUserById(int userId) async {

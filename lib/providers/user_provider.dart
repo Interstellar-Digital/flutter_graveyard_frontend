@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_graveyard_frontend/models/user.dart';
+import 'package:flutter_graveyard_frontend/models/user_model.dart';
 import 'package:flutter_graveyard_frontend/repository/user_repository.dart';
 
 enum UserRole {
