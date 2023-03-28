@@ -6,8 +6,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(100),
           child: Container(
@@ -24,8 +23,6 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: const Center(child: LoginDetails())
-      ),
-    );
+        body: const Center(child: LoginDetails()));
   }
 }
