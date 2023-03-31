@@ -6,6 +6,8 @@ class UserProvider with ChangeNotifier {
 
   User? get user => _user;
 
+  String? get role => _user?.role; // get method for role property
+
   set password(String password) {
     if (_user != null) {
       _user!.password = password;
@@ -20,7 +22,13 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  
+  bool get isAdmin {
+    if (_user != null && _user!.role == 'admin') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   void login(String username, String password) {
     if (username == 'admin' && password == 'password') {
