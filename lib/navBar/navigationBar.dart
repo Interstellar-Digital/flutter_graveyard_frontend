@@ -8,6 +8,11 @@ PreferredSize NavBar() {
         children: [
           Image.network(
               'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/gp_logo.png'),
+          //backbutton
+          Text(
+            'Select Graveyard', //dynamic
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
           Row(
             children: [
               Image.network(
