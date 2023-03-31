@@ -23,6 +23,6 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: const Center(child: LoginDetails()));
+        body: Center(child: LoginDetails()));
   }
 }

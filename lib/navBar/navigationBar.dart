@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_graveyard_frontend/providers/user_provider.dart';
 
 PreferredSize NavBar() {
   return PreferredSize(
@@ -9,9 +11,15 @@ PreferredSize NavBar() {
           Image.network(
               'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/gp_logo.png'),
           //backbutton
-          Text(
-            'Select Graveyard', //dynamic
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          Consumer<UserProvider>(
+            builder: (context, userProvider, _) {
+              final user = userProvider.user;
+              final username = user != null ? user.username : '';
+              return Text(
+                'Welcome, $username!', // display username if user is logged in
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              );
+            },
           ),
           Row(
             children: [

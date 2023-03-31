@@ -6,25 +6,40 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_graveyard_frontend/graveyardSelection/graveyardSelectionSreen.dart';
+import 'package:flutter_graveyard_frontend/providers/user_provider.dart';
+import 'package:flutter_graveyard_frontend/login/login_functionallity.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:flutter_graveyard_frontend/main.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('LoginDetails widget test', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      ChangeNotifierProvider<UserProvider>(
+        create: (context) => UserProvider(),
+        child: MaterialApp(
+          home: Scaffold(
+            body: LoginDetails(),
+          ),
+        ),
+      ),
+    );
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Find the TextFormField widgets
+    final usernameFieldFinder = find.byType(TextFormField).at(0);
+    final passwordFieldFinder = find.byType(TextFormField).at(1);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // Enter text in username and password fields
+    await tester.enterText(usernameFieldFinder, 'admin');
+    await tester.enterText(passwordFieldFinder, 'password');
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Tap on the login button
+    await tester.tap(find.text('Log In'));
+
+    // Wait for the widget tree to rebuild
+    await tester.pumpAndSettle();
+
+    // Verify that the GraveyardInDistrictSelectionScreen is displayed
+    expect(find.byType(GraveyardInDistrictSelectionScreen), findsOneWidget);
   });
 }
