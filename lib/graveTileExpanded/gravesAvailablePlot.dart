@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class UsedPlots extends StatelessWidget {
-  const UsedPlots({super.key});
+class AvailablePlots extends StatelessWidget {
+  const AvailablePlots({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Column(
         children: [
-          Text('Used Plots'),
+          Text('Available Plots'),
           Divider(),
           Row(
             children: [

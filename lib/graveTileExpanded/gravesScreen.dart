@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_graveyard_frontend/graveTileExpanded/gravesAvailablePlot.dart';
 import 'package:flutter_graveyard_frontend/graveTileExpanded/gravesButtons.dart';
+import 'package:flutter_graveyard_frontend/graveTileExpanded/gravesReservedPlots.dart';
+import 'package:flutter_graveyard_frontend/graveTileExpanded/gravesUsedplots.dart';
 import 'package:flutter_graveyard_frontend/navBar/navigationBar.dart';
 
 class GravesScreen extends StatelessWidget {
@@ -16,6 +19,13 @@ class GravesScreen extends StatelessWidget {
       body: Column(
         children: [
           GraveButtons(),
+          Row(
+            children: [
+              AvailablePlots(),
+              UsedPlots(),
+              ReservedPlots(),
+            ],
+          ),
         ],
       ),
     );
