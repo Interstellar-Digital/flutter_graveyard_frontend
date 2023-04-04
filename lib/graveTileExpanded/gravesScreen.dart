@@ -15,36 +15,38 @@ class GravesScreen extends StatelessWidget {
             Navigator.pop(context);
           },
           pageTitle: 'CemteryGrave_Placeholder'),
-      body: Row(
-        children: [
-          Column(
-            children: [
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('Remove Plot/Grave'),
-              ),
-              AvailablePlots(),
-            ],
-          ),
-          Column(
-            children: [
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('Add Plot/Grave'),
-              ),
-              UsedPlots(),
-            ],
-          ),
-          Column(
-            children: [
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('Update Price'),
-              ),
-              ReservedPlots(),
-            ],
-          ),
-        ],
+      body: Center(
+        child: Row(
+          children: [
+            Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Remove Plot/Grave'),
+                ),
+                AvailablePlots(),
+              ],
+            ),
+            Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Add Plot/Grave'),
+                ),
+                UsedPlots(),
+              ],
+            ),
+            Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Update Price'),
+                ),
+                ReservedPlots(),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
