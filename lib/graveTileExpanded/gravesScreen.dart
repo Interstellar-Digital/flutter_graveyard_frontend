@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_graveyard_frontend/graveTileExpanded/gravesAvailablePlot.dart';
-import 'package:flutter_graveyard_frontend/graveTileExpanded/gravesButtons.dart';
 import 'package:flutter_graveyard_frontend/graveTileExpanded/gravesReservedPlots.dart';
 import 'package:flutter_graveyard_frontend/graveTileExpanded/gravesUsedplots.dart';
 import 'package:flutter_graveyard_frontend/navBar/navigationBar.dart';
@@ -16,13 +15,32 @@ class GravesScreen extends StatelessWidget {
             Navigator.pop(context);
           },
           pageTitle: 'CemteryGrave_Placeholder'),
-      body: Column(
+      body: Row(
         children: [
-          GraveButtons(),
-          Row(
+          Column(
             children: [
+              ElevatedButton(
+                onPressed: () {},
+                child: Text('Remove Plot/Grave'),
+              ),
               AvailablePlots(),
+            ],
+          ),
+          Column(
+            children: [
+              ElevatedButton(
+                onPressed: () {},
+                child: Text('Add Plot/Grave'),
+              ),
               UsedPlots(),
+            ],
+          ),
+          Column(
+            children: [
+              ElevatedButton(
+                onPressed: () {},
+                child: Text('Update Price'),
+              ),
               ReservedPlots(),
             ],
           ),
