@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 
-PreferredSize NavBar() {
+PreferredSize NavBar(
+    {required void Function()? onPressCallBack, required String pageTitle}) {
   return PreferredSize(
     child: Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.network(
-              'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/gp_logo.png'),
-          //backbutton
+          Row(
+            children: [
+              Image.network(
+                  'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/gp_logo.png'),
+              IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: onPressCallBack,
+              ),
+            ],
+          ),
           Text(
-            'Select Graveyard', //dynamic
+            pageTitle, //dynamic
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Row(
