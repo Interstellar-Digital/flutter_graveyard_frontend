@@ -27,7 +27,7 @@ class BurialScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: AddGrave(),
+                    child: AddGrave(context),
                   )
                 ],
               ),
