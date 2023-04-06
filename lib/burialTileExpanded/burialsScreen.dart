@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_graveyard_frontend/burialTileExpanded/burialsList.dart';
 import 'package:flutter_graveyard_frontend/navBar/navigationBar.dart';
 import 'package:paginated_search_bar/paginated_search_bar.dart';
 
+import 'addBurial.dart';
 import 'graveSearchbar.dart';
 
 class BurialScreen extends StatelessWidget {
@@ -14,31 +16,53 @@ class BurialScreen extends StatelessWidget {
             onPressCallBack: () {}, pageTitle: 'District_BurialScreenHolder'),
         body: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    showSearch(
-                      context: context,
-                      delegate: SearchGraveList(),
-                    );
-                  },
-                  icon: Icon(Icons.search),
-                ),
-                FloatingActionButton(
-                  backgroundColor: Color.fromRGBO(6,208,111, 1),
-                  child: Text(
-                    '+Add',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.black),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 800,
+                    child: GraveSearch(),
                   ),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                  onPressed: () {}, //add person to grave list
-                )
-              ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: AddGrave(),
+                  )
+                ],
+              ),
             ),
-            Column(),
+            Padding(
+              padding: const EdgeInsets.only(top: 40),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    'Name',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                  ),
+                  Text('Plot Type',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+                  Text('Plot No.',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+                  Text('Stay',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+                  Text('Date of Birth',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+                  Text('Date of Death',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+                  SizedBox(
+                    width: 50,
+                  )
+                ],
+              ),
+            ),
+            GraveList()
           ],
         ));
   }
