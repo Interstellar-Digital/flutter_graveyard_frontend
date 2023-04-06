@@ -4,7 +4,7 @@ import 'package:flutter_graveyard_frontend/navBar/navigationBar.dart';
 import 'package:paginated_search_bar/paginated_search_bar.dart';
 
 import 'addBurial.dart';
-import 'graveSearchbar.dart';
+import 'graveSearchBar.dart';
 
 class BurialScreen extends StatelessWidget {
   const BurialScreen({super.key});

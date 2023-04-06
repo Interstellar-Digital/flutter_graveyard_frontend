@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_graveyard_frontend/burialTileExpanded/burialsScreen.dart';
 import 'package:flutter_graveyard_frontend/graveTileExpanded/gravesScreen.dart';
 import 'package:flutter_graveyard_frontend/graveyardSelection/graveyardSelectionSreen.dart';
 
@@ -16,7 +17,7 @@ class GraveyardManagementSystem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: GravesScreen(),
+      home: BurialScreen(),
     );
   }
 }

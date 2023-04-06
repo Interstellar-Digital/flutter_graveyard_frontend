@@ -41,6 +41,7 @@ dependencies:
   equatable: ^2.0.0
   formz: ^0.3.2
   uuid: ^3.0.0
+  paginated_search_bar: ^1.1.2
 
 dev_dependencies:
   flutter_test:
