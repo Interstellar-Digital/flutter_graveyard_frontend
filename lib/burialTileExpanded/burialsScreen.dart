@@ -7,13 +7,17 @@ import 'addBurial.dart';
 import 'graveSearchBar.dart';
 
 class BurialScreen extends StatelessWidget {
-  const BurialScreen({super.key});
+  final String pageTitle;
+  const BurialScreen({super.key, required this.pageTitle});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: NavBar(
-            onPressCallBack: () {}, pageTitle: 'District_BurialScreenHolder'),
+            onPressCallBack: () {
+              Navigator.pop(context);
+            },
+            pageTitle: pageTitle),
         body: Column(
           children: [
             Padding(
