@@ -8,7 +8,8 @@ import 'package:flutter_graveyard_frontend/graveTileExpanded/updateGravePricePop
 import 'package:flutter_graveyard_frontend/navBar/navigationBar.dart';
 
 class GravesScreen extends StatelessWidget {
-  const GravesScreen({super.key});
+  final String pageTitle;
+  const GravesScreen({super.key, required this.pageTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class GravesScreen extends StatelessWidget {
           onPressCallBack: () {
             Navigator.pop(context);
           },
-          pageTitle: 'CemteryGrave_Placeholder'),
+          pageTitle: pageTitle),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 200),
         child: Padding(
