@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_graveyard_frontend/graveTileExpanded/gravesScreen.dart';
+import 'package:flutter_graveyard_frontend/notificationTileExpanded/notificationScreen.dart';
+import 'package:flutter_graveyard_frontend/paymentTileExpaned/paymentScreen.dart';
+import 'package:flutter_graveyard_frontend/reportTileExpanded/reportScreen.dart';
 import 'package:flutter_graveyard_frontend/reservationTileExpanded/reservationScreen.dart';
 
 import '../burialTileExpanded/burialsScreen.dart';
@@ -52,13 +55,13 @@ class GraveyardDashboardTiles extends StatelessWidget {
                       return ReservationScreen(pageTitle: '${items[index]}');
                     }
                     if ('${items[index]}' == 'Report') {
-                      return GravesScreen(pageTitle: '${items[index]}');
+                      return ReportScreen(pageTitle: '${items[index]}');
                     }
                     if ('${items[index]}' == 'Payments') {
-                      return GravesScreen(pageTitle: '${items[index]}');
+                      return PaymentScreen(pageTitle: '${items[index]}');
                     }
 
-                    return GravesScreen(pageTitle: '${items[index]}');
+                    return NotificationScreen(pageTitle: '${items[index]}');
                   }),
                 );
               },

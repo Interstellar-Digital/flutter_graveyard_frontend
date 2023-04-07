@@ -17,7 +17,7 @@ class GraveyardManagementSystem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: BurialScreen(),
+      home:LoginScreen(),
     );
   }
 }
