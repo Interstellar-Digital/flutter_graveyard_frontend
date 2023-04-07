@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_graveyard_frontend/graveTileExpanded/gravesScreen.dart';
+
+import '../burialTileExpanded/burialsScreen.dart';
 
 class GraveyardDashboardTiles extends StatelessWidget {
   const GraveyardDashboardTiles({super.key});
@@ -33,25 +36,51 @@ class GraveyardDashboardTiles extends StatelessWidget {
             childAspectRatio: 3 / 2.5,
           ),
           itemBuilder: (BuildContext context, int index) {
-            return Card(
-              color: Color.fromRGBO(185, 243, 252, 1),
-              elevation: 7,
-              child: Column(
-                children: [
-                  Expanded(
-                    flex:5,
-                    child: Image.network(
-                      '${images[index]}',
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (BuildContext context) {
+                    if ('${items[index]}' == 'Graves') {
+                      return GravesScreen(pageTitle: '${items[index]}');
+                    }
+                    if ('${items[index]}' == 'Burials') {
+                      return BurialScreen(pageTitle: '${items[index]}');
+                    }
+                    if ('${items[index]}' == 'Reservations') {
+                      return GravesScreen(pageTitle: '${items[index]}');
+                    }
+                    if ('${items[index]}' == 'Report') {
+                      return GravesScreen(pageTitle: '${items[index]}');
+                    }
+                    if ('${items[index]}' == 'Payments') {
+                      return GravesScreen(pageTitle: '${items[index]}');
+                    }
+
+                    return GravesScreen(pageTitle: '${items[index]}');
+                  }),
+                );
+              },
+              child: Card(
+                color: Color.fromRGBO(185, 243, 252, 1),
+                elevation: 7,
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 5,
+                      child: Image.network(
+                        '${images[index]}',
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      '${items[index]}',
-                      style: TextStyle(fontSize: 24.0),
-                      textAlign: TextAlign.center,
+                    Expanded(
+                      child: Text(
+                        '${items[index]}',
+                        style: TextStyle(fontSize: 24.0),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },
