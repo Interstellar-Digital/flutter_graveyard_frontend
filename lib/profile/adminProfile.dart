@@ -7,7 +7,12 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: NavBar(onPressCallBack: () {}, pageTitle: 'ProfilePageHolder'),
+      appBar: NavBar(
+          onPressCallBack: () {
+            Navigator.pop(context);
+          },
+          pageTitle: 'ProfilePageHolder',
+          context: context),
       body: Center(
         child: Row(
           children: [

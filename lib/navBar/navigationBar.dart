@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_graveyard_frontend/profile/adminProfile.dart';
 
 PreferredSize NavBar(
-    {required void Function()? onPressCallBack, required String pageTitle}) {
+    {required void Function()? onPressCallBack,
+    required String pageTitle,
+    required BuildContext context}) {
   return PreferredSize(
     child: Container(
       child: Row(
@@ -23,8 +26,18 @@ PreferredSize NavBar(
           ),
           Row(
             children: [
-              Image.network(
-                  'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/usericon.png'),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const ProfilePage(),
+                    ),
+                  );
+                },
+                child: Image.network(
+                    'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/usericon.png'),
+              ),
               Image.network(
                   'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/AddUser.png'),
             ],

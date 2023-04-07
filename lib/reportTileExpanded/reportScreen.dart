@@ -8,7 +8,7 @@ class ReportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: NavBar(
+      appBar: NavBar(context: context,
           onPressCallBack: () {
             Navigator.pop(context);
           },

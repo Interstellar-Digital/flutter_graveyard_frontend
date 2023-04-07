@@ -8,7 +8,7 @@ class GraveyardInDistrictSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: NavBar(onPressCallBack: () {  }, pageTitle: 'Select Graveyard'),
+      appBar: NavBar(context: context, onPressCallBack: () {  }, pageTitle: 'Select Graveyard'),
       body: GraveyardInDiscrict(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(254, 222, 255, 1),
