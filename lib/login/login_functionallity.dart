@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_graveyard_frontend/graveyardSelection/graveyardSelectionSreen.dart';
+import 'package:flutter_graveyard_frontend/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class LoginDetails extends StatelessWidget {
-  const LoginDetails({super.key});
+  LoginDetails({super.key});
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,6 +32,7 @@ class LoginDetails extends StatelessWidget {
                 )),
             TextFormField(
               //username
+              controller: _usernameController,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
@@ -38,21 +43,30 @@ class LoginDetails extends StatelessWidget {
                   borderRadius: BorderRadius.circular(32.0),
                 ),
               ),
+              onChanged: (value) {
+                context.read<UserProvider>().username = value;
+              },
             ),
             const SizedBox(
               height: 20,
             ),
             TextFormField(
-                //password
-                decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.white,
-              hintText: 'Password',
-              contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(32.0),
+              //password
+              controller: _passwordController,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                hintText: 'Password',
+                contentPadding:
+                    const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(32.0),
+                ),
               ),
-            )),
+              onChanged: (value) {
+                context.read<UserProvider>().password = value;
+              },
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: ElevatedButton(
@@ -61,14 +75,22 @@ class LoginDetails extends StatelessWidget {
                   backgroundColor: MaterialStatePropertyAll(
                       Color.fromRGBO(147, 198, 231, 1)),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   //navigate to selectgraveyard_screen
+                  final username = _usernameController.text;
+                  final password = _passwordController.text;
+
+                  context.read<UserProvider>().login(username, password);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) =>
                           const GraveyardInDistrictSelectionScreen(),
                     ),
                   );
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("Logged In"),
+                    backgroundColor: Colors.greenAccent,
+                  ));
                 },
                 child: const Text('Log In'),
               ),

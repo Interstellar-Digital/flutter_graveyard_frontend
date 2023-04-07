@@ -9,7 +9,9 @@ import 'package:flutter_graveyard_frontend/graveyardSelection/graveyardSelection
 import 'package:flutter_graveyard_frontend/graveyardDashboard/dashboardScreen.dart';
 import 'login/login_screen.dart';
 
-void main() => runApp(GraveyardManagementSystem());
+void main() => runApp(
+      GraveyardManagementSystem(),
+    );
 
 class GraveyardManagementSystem extends StatelessWidget {
   const GraveyardManagementSystem({super.key});
@@ -17,7 +19,7 @@ class GraveyardManagementSystem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home:LoginScreen(),
+      home: LoginScreen(),
     );
   }
 }
