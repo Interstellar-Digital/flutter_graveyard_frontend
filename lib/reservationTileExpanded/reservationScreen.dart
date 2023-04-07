@@ -5,14 +5,17 @@ import 'package:flutter_graveyard_frontend/reservationTileExpanded/reservationLi
 import 'package:flutter_graveyard_frontend/reservationTileExpanded/reservationSearchbar.dart';
 
 class ReservationScreen extends StatelessWidget {
-  const ReservationScreen({super.key});
+  final String pageTitle;
+  const ReservationScreen({super.key, required this.pageTitle});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: NavBar(
-            onPressCallBack: () {},
-            pageTitle: 'District_ReservationScreenHolder'),
+            onPressCallBack: () {
+              Navigator.pop(context);
+            },
+            pageTitle: pageTitle),
         body: Column(
           children: [
             Padding(
