@@ -3,7 +3,8 @@ import 'dashboardTiles.dart';
 import 'package:flutter_graveyard_frontend/navBar/navigationBar.dart';
 
 class GraveyardDashboard extends StatelessWidget {
-  const GraveyardDashboard({super.key});
+  final String pageTitle;
+  const GraveyardDashboard({super.key, required this.pageTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class GraveyardDashboard extends StatelessWidget {
           onPressCallBack: () {
             Navigator.pop(context);
           },
-          pageTitle: 'Graveyard_Pageholder'),
+          pageTitle: pageTitle),
       body: GraveyardDashboardTiles(),
     );
   }
