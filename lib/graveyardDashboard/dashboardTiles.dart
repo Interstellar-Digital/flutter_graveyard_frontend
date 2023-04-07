@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_graveyard_frontend/graveTileExpanded/gravesScreen.dart';
+import 'package:flutter_graveyard_frontend/reservationTileExpanded/reservationScreen.dart';
 
 import '../burialTileExpanded/burialsScreen.dart';
 
@@ -48,7 +49,7 @@ class GraveyardDashboardTiles extends StatelessWidget {
                       return BurialScreen(pageTitle: '${items[index]}');
                     }
                     if ('${items[index]}' == 'Reservations') {
-                      return GravesScreen(pageTitle: '${items[index]}');
+                      return ReservationScreen(pageTitle: '${items[index]}');
                     }
                     if ('${items[index]}' == 'Report') {
                       return GravesScreen(pageTitle: '${items[index]}');
