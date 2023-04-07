@@ -13,7 +13,7 @@ class GraveyardInDistrictSelectionScreen extends StatelessWidget {
     bool isAdmin = userProvider.role == 'admin';
 
     return Scaffold(
-      appBar: NavBar(),
+      appBar: NavBar(context: context, onPressCallBack: () {  }, pageTitle: 'Select Graveyard'),
       body: GraveyardInDiscrict(),
       floatingActionButton: isAdmin
           ? FloatingActionButton(
