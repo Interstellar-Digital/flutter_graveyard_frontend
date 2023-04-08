@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_graveyard_frontend/graveyardDashboard/dashboardScreen.dart';
 
@@ -6,15 +8,16 @@ class GraveyardInDiscrict extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> items = [
-      'San Juan Public Cemetery',
-      'Tunapuna Cemetery',
-      'Five Rivers Islamic Cemetery',
-      'Streamham Lodge',
-    ];
+    final List<String> items = [      'San Juan Public Cemetery',      'Tunapuna Cemetery',      'Five Rivers Islamic Cemetery',      'Streamham Lodge',    ];
+
+    EdgeInsets padding = EdgeInsets.only(top: 50);
+    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS || Platform.isFuchsia) {
+      padding = EdgeInsets.symmetric(horizontal: 250, vertical: 50);
+    }
+
     return Container(
       child: Padding(
-        padding: EdgeInsets.only(left: 250, right: 250, top: 50),
+        padding: padding,
         child: GridView.builder(
           itemCount: items.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
