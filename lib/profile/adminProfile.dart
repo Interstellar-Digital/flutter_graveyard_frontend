@@ -12,7 +12,8 @@ class ProfilePage extends StatelessWidget {
             Navigator.pop(context);
           },
           pageTitle: 'ProfilePageHolder',
-          context: context),
+          context: context,
+          showBackArrow: true),
       body: Center(
         child: Row(
           children: [

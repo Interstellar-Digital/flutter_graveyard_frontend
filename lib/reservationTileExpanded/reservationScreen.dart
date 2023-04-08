@@ -11,11 +11,13 @@ class ReservationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: NavBar(context: context,
+        appBar: NavBar(
+            context: context,
             onPressCallBack: () {
               Navigator.pop(context);
             },
-            pageTitle: pageTitle),
+            pageTitle: pageTitle,
+            showBackArrow: true),
         body: Column(
           children: [
             Padding(

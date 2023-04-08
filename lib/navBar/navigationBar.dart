@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_graveyard_frontend/profile/adminProfile.dart';
-
 import 'package:provider/provider.dart';
 import 'package:flutter_graveyard_frontend/providers/user_provider.dart';
-
 import 'package:flutter_graveyard_frontend/profile/adminProfile.dart';
 
-
-PreferredSize NavBar(
-    {required void Function()? onPressCallBack,
-    required String pageTitle,
-    required BuildContext context}) {
+PreferredSize NavBar({
+  required void Function()? onPressCallBack,
+  required String pageTitle,
+  required BuildContext context,
+  bool showBackArrow = true,
+}) {
   return PreferredSize(
     child: Container(
       child: Row(
@@ -18,12 +17,12 @@ PreferredSize NavBar(
         children: [
           Row(
             children: [
-              Image.asset(
-                  'assets/gp_logo.png'),
-              IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: onPressCallBack,
-              ),
+              Image.asset('assets/gp_logo.png'),
+              if (showBackArrow)
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: onPressCallBack,
+                ),
             ],
           ),
           Text(
@@ -41,11 +40,9 @@ PreferredSize NavBar(
                     ),
                   );
                 },
-                child: Image.asset(
-                    'assets/usericon.png'),
+                child: Image.asset('assets/usericon.png'),
               ),
-              Image.asset(
-                  'assets/AddUser.png'),
+              Image.asset('assets/AddUser.png'),
             ],
           )
         ],

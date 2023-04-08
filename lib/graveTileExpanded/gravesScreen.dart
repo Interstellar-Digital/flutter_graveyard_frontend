@@ -14,11 +14,13 @@ class GravesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: NavBar(context: context,
+      appBar: NavBar(
+          context: context,
           onPressCallBack: () {
             Navigator.pop(context);
           },
-          pageTitle: pageTitle),
+          pageTitle: pageTitle,
+          showBackArrow: true),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 200),
         child: Padding(
