@@ -14,8 +14,8 @@ class LoginScreen extends StatelessWidget {
             child: Row(
               children: [
                 SizedBox(
-                  child: Image.network(
-                    'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/gp_logo.png',
+                  child: Image.asset(
+                    'assets/gp_logo.png',
                     fit: BoxFit.fill,
                   ),
                 ),

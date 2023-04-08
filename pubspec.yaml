@@ -74,6 +74,9 @@ flutter:
     - assets/report.png
     - assets/payment.png
     - assets/notification.png
+    - assets/gp_logo.png
+    - assets/usericon.png
+    - assets/AddUser.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

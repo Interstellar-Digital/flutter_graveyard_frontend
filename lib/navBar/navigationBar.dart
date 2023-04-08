@@ -18,8 +18,8 @@ PreferredSize NavBar(
         children: [
           Row(
             children: [
-              Image.network(
-                  'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/gp_logo.png'),
+              Image.asset(
+                  'assets/gp_logo.png'),
               IconButton(
                 icon: Icon(Icons.arrow_back),
                 onPressed: onPressCallBack,
@@ -41,11 +41,11 @@ PreferredSize NavBar(
                     ),
                   );
                 },
-                child: Image.network(
-                    'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/usericon.png'),
+                child: Image.asset(
+                    'assets/usericon.png'),
               ),
-              Image.network(
-                  'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/AddUser.png'),
+              Image.asset(
+                  'assets/AddUser.png'),
             ],
           )
         ],
