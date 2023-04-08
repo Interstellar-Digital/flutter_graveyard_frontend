@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_graveyard_frontend/burialTileExpanded/burialsScreen.dart';
 import 'package:flutter_graveyard_frontend/graveTileExpanded/gravesScreen.dart';
 import 'package:flutter_graveyard_frontend/graveyardSelection/graveyardSelectionSreen.dart';
@@ -10,14 +9,8 @@ import 'package:flutter_graveyard_frontend/graveyardDashboard/dashboardScreen.da
 import 'login/login_screen.dart';
 
 void main() => runApp(
-      MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => UserProvider()),
-          // Add other providers here if needed
-        ],
-        child: GraveyardManagementSystem(),
-      ),
-    );
+    GraveyardManagementSystem()
+);
 
 class GraveyardManagementSystem extends StatelessWidget {
   const GraveyardManagementSystem({super.key});

@@ -21,12 +21,12 @@ class GraveyardDashboardTiles extends StatelessWidget {
       'Notifications',
     ];
     final List<String> images = [
-      'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/graves.png',
-      'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/openGraves.png',
-      'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/reservedGraves.png',
-      'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/report.png',
-      'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/payment.png',
-      'https://raw.githubusercontent.com/Interstellar-Digital/images/main/images/notification.png',
+      'assets/graves.png',
+      'assets/openGraves.png',
+      'assets/reservedGraves.png',
+      'assets/report.png',
+      'assets/payment.png',
+      'assets/notification.png',
     ];
     return Container(
       child: Padding(
@@ -72,7 +72,7 @@ class GraveyardDashboardTiles extends StatelessWidget {
                   children: [
                     Expanded(
                       flex: 5,
-                      child: Image.network(
+                      child: Image.asset(
                         '${images[index]}',
                       ),
                     ),

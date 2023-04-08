@@ -27,10 +27,10 @@ class GraveyardInDiscrict extends StatelessWidget {
             return GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => GraveyardDashboard(pageTitle:'${items[index]}',),
-                    ),);
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => GraveyardDashboard(pageTitle:'${items[index]}',),
+                  ),);
               },
               child: Card(
                 color: Color.fromRGBO(185, 243, 252, 1),
