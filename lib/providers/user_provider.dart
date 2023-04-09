@@ -1,26 +1,34 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_graveyard_frontend/models/user_model.dart';
+import 'package:flutter_graveyard_frontend/repository/user_repository.dart';
 
 class UserProvider with ChangeNotifier {
+  final UserRepository _userRepository = UserRepository();
   User? _user;
 
   User? get user => _user;
 
   String? get role => _user?.role; // get method for role property
 
-  set password(String password) {
-    if (_user != null) {
-      _user!.password = password;
-      notifyListeners();
-    }
+  Future<void> login(String username, String password) async {
+    final User? user = await _userRepository.login(username, password);
+    _user = user;
+    notifyListeners();
   }
 
-  set username(String username) {
-    if (_user != null) {
-      _user!.username = username;
-      notifyListeners();
-    }
+  Future<void> logout() async {
+    await _userRepository.logout();
+    _user = null;
+    notifyListeners();
   }
+  // add the setUser method
+  void setUser(String username, String role) {
+    _user = User(username: username, role: role);
+    notifyListeners();
+  }
+
+
+  String? get userId => _user?.userID;
 
   bool get isAdmin {
     if (_user != null && _user!.role == 'admin') {
@@ -28,32 +36,5 @@ class UserProvider with ChangeNotifier {
     } else {
       return false;
     }
-  }
-
-  void login(String username, String password) {
-    if (username == 'admin' && password == 'password') {
-      _user = User(
-        userID: '123',
-        username: username,
-        password: password,
-        role: 'admin',
-      );
-      notifyListeners();
-    } else if(username == "user" && password == 'password'){
-      _user = User(
-        userID: '124',
-        username: username,
-        password: password,
-        role: 'user',
-      );
-      notifyListeners();
-    } else {
-      throw Exception('Invalid login credentials');
-    }
-  }
-
-  void logout() {
-    _user = null;
-    notifyListeners();
   }
 }
