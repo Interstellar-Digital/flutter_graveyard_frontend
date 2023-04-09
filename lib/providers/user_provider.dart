@@ -13,6 +13,7 @@ class UserProvider with ChangeNotifier {
   Future<void> login(String username, String password) async {
     final User? user = await _userRepository.login(username, password);
     _user = user;
+    print(_user);
     notifyListeners();
   }
 
@@ -22,8 +23,8 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
   // add the setUser method
-  void setUser(String username, String role) {
-    _user = User(username: username, role: role);
+  void setUser(String? userID, String username, String role, String? accessToken) {
+    _user = User(userID: userID, username: username, role: role, accessToken: accessToken);
     notifyListeners();
   }
 

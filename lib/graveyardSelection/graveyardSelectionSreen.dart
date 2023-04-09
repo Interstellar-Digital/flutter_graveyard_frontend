@@ -13,7 +13,7 @@ class GraveyardInDistrictSelectionScreen extends StatelessWidget {
           onPressCallBack: () {},
           pageTitle: 'Select Graveyard',
           showBackArrow: false),
-      body: GraveyardInDiscrict(),
+      body: GraveyardInDistrict(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(254, 222, 255, 1),
         child: Text(

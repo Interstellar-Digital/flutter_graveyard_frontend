@@ -13,19 +13,19 @@ class Graveyard {
 
   factory Graveyard.fromJson(Map<String, dynamic> json) {
     return Graveyard(
-      graveyardID: json['graveyardID'],
+      graveyardID: json['id'],
       name: json['name'],
       location: json['location'],
-      numberOfPlots: json['numberOfPlots'],
+      numberOfPlots: json['max_plots'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'graveyardID': graveyardID,
+      'id': graveyardID,
       'name': name,
       'location': location,
-      'numberOfPlots': numberOfPlots
+      'max_plots': numberOfPlots
 
 , };
 }

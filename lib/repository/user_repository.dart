@@ -13,7 +13,7 @@ class UserRepository {
 
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
-      print(json);
+
       return User.fromJson(json);
     } else {
       throw Exception('Failed to login: ${response.statusCode}');

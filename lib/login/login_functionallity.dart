@@ -43,8 +43,7 @@ class LoginDetails extends StatelessWidget {
                 filled: true,
                 fillColor: Colors.white,
                 hintText: 'Username',
-                contentPadding:
-                EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(32.0),
                 ),
@@ -62,7 +61,7 @@ class LoginDetails extends StatelessWidget {
                 fillColor: Colors.white,
                 hintText: 'Password',
                 contentPadding:
-                const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                    const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(32.0),
                 ),
@@ -86,13 +85,16 @@ class LoginDetails extends StatelessWidget {
                     );
                     if (user != null) {
                       // set user to state if user exists
-                      Provider.of<UserProvider>(context, listen: false)
-                          .setUser(user.username, user.role);
+                      Provider.of<UserProvider>(context, listen: false).setUser(
+                          user.userID,
+                          user.username,
+                          user.role,
+                          user.accessToken);
                       // navigate to selectgraveyard_screen
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) =>
-                          const GraveyardInDistrictSelectionScreen(),
+                              const GraveyardInDistrictSelectionScreen(),
                         ),
                       );
                     } else {

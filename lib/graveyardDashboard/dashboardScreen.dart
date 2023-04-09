@@ -4,7 +4,8 @@ import 'package:flutter_graveyard_frontend/navBar/navigationBar.dart';
 
 class GraveyardDashboard extends StatelessWidget {
   final String pageTitle;
-  const GraveyardDashboard({super.key, required this.pageTitle});
+  final String accessToken;
+  const GraveyardDashboard({super.key, required this.pageTitle, required this.accessToken});
 
   @override
   Widget build(BuildContext context) {
