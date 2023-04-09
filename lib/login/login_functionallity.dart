@@ -33,7 +33,7 @@ class LoginDetails extends StatelessWidget {
                 fillColor: Colors.white,
                 hintText: 'Username',
                 contentPadding:
-                const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                    const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(32.0),
                 ),
@@ -43,16 +43,16 @@ class LoginDetails extends StatelessWidget {
               height: 20,
             ),
             TextFormField(
-              //password
+                //password
                 decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: 'Password',
-                  contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32.0),
-                  ),
-                )),
+              filled: true,
+              fillColor: Colors.white,
+              hintText: 'Password',
+              contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(32.0),
+              ),
+            )),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: ElevatedButton(
@@ -66,7 +66,7 @@ class LoginDetails extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) =>
-                      const GraveyardInDistrictSelectionScreen(),
+                          const GraveyardInDistrictSelectionScreen(),
                     ),
                   );
                 },
