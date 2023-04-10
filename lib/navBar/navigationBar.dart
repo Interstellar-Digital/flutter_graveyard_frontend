@@ -40,11 +40,26 @@ PreferredSize NavBar({
                     ),
                   );
                 },
-                child: Image.asset('assets/usericon.png'),
+                child: Image.asset(
+                  'assets/usericon.png',
+                  width: 30,
+                ),
               ),
-              Image.asset('assets/AddUser.png'),
+              Image.asset(
+                'assets/AddUser.png',
+                width: 30,
+              ),
+              IconButton(
+                icon: Icon(Icons.logout),
+                onPressed: () {
+                  //Provider.of<UserProvider>(context, listen: false).logout();
+                  Navigator.of(context).pushReplacementNamed(
+                    '/login',
+                  );
+                },
+              ),
             ],
-          )
+          ),
         ],
       ),
       color: Color.fromRGBO(174, 226, 255, 1),
