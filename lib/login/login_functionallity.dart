@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_graveyard_frontend/graveyardSelection/graveyardSelectionSreen.dart';
 import 'package:flutter_graveyard_frontend/models/user_model.dart';
 import 'package:flutter_graveyard_frontend/repository/user_repository.dart';
 import 'package:flutter_graveyard_frontend/providers/user_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginDetails extends StatefulWidget {
   const LoginDetails({Key? key}) : super(key: key);
@@ -111,9 +114,13 @@ class _LoginDetailsState extends State<LoginDetails> {
                       );
                       Provider.of<UserProvider>(context, listen: false)
                           .setPageTitle("Select Graveyard");
+                      // Update shared preferences with user details
+                      final prefs = await SharedPreferences.getInstance();
+                      final userJson = jsonEncode(user);
+                      await prefs.setString('user', userJson);
                       // navigate to selectgraveyard_screen
                       Navigator.of(context).pushReplacementNamed(
-                          '/graveyard-selection',
+                        '/graveyard-selection',
                       );
                     } else {
                       showDialog(

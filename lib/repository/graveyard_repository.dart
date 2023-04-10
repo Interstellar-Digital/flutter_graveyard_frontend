@@ -2,7 +2,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_graveyard_frontend/models/graveyard_model.dart';
 
+import '../models/user_model.dart';
+
 const String baseUrl = 'https://graveyard-api.onrender.com/api';
+//const String baseUrl = 'http://localhost:8080/api';
 
 class GraveyardRepository {
   Future<List<Graveyard>>? getAllGraveyards(String accessToken, String username) async {
@@ -34,11 +37,19 @@ class GraveyardRepository {
     }
   }
 
-  Future<void> saveGraveyard(Graveyard graveyard, String accessToken) async {
+  Future<void> saveGraveyard(Graveyard graveyard, String userID, String accessToken) async {
     final response = await http.post(
       Uri.parse('$baseUrl/graveyards'),
-      headers: <String, String>{'Content-Type': 'application/json', 'Authorization': 'Bearer $accessToken'},
-      body: jsonEncode(graveyard.toJson()),
+      headers: <String, String>{
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json'
+      },
+      body: jsonEncode({
+        'name': graveyard.name,
+        'location': graveyard.location,
+        'max_plots': graveyard.numberOfPlots,
+        'owner_id': userID,
+      }),
     );
     if (response.statusCode != 201) {
       throw Exception('Failed to create graveyard: ${response.statusCode}');

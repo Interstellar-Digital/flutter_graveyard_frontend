@@ -6,16 +6,20 @@ import 'package:flutter_graveyard_frontend/repository/graveyard_repository.dart'
 import 'package:flutter_graveyard_frontend/models/graveyard_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_graveyard_frontend/providers/user_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GraveyardInDistrictSelectionScreen extends StatelessWidget {
-  const GraveyardInDistrictSelectionScreen({super.key});
+  const GraveyardInDistrictSelectionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
     final title = userProvider.pageTitle;
-    final accessToken = user?.accessToken ?? '';
+    SharedPreferences.getInstance().then((prefs) {
+      final accessToken = prefs.getString('accessToken') ?? '';
+      final userID = prefs.getString('userID') ?? '';
+    });
     return Scaffold(
       appBar: NavBar(
           context: context,
@@ -80,8 +84,15 @@ class GraveyardInDistrictSelectionScreen extends StatelessWidget {
                     child: Text('Save'),
                     onPressed: () async {
                       final graveyardRepository = GraveyardRepository();
-                      final graveyard = Graveyard(name: name, location: location, numberOfPlots: maxPlots);
-                      await graveyardRepository.saveGraveyard(graveyard, accessToken);
+                      final graveyard = Graveyard(name: name,
+                          location: location,
+                          numberOfPlots: maxPlots);
+                      SharedPreferences prefs = await SharedPreferences
+                          .getInstance();
+                      final accessToken = prefs.getString('accessToken') ?? '';
+                      final userID = prefs.getString('userID') ?? '';
+                      await graveyardRepository.saveGraveyard(
+                          graveyard, userID, accessToken);
                       Navigator.pop(context);
                     },
                   ),
