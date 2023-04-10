@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_graveyard_frontend/models/graveyard_model.dart';
 
-const String baseUrl = 'http://localhost:8080/api';
+const String baseUrl = 'https://graveyard-api.onrender.com/api';
 
 class GraveyardRepository {
   Future<List<Graveyard>>? getAllGraveyards(String accessToken, String username) async {
