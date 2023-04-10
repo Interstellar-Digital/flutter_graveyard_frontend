@@ -34,10 +34,10 @@ class GraveyardRepository {
     }
   }
 
-  Future<void> saveGraveyard(Graveyard graveyard) async {
+  Future<void> saveGraveyard(Graveyard graveyard, String accessToken) async {
     final response = await http.post(
       Uri.parse('$baseUrl/graveyards'),
-      headers: <String, String>{'Content-Type': 'application/json'},
+      headers: <String, String>{'Content-Type': 'application/json', 'Authorization': 'Bearer $accessToken'},
       body: jsonEncode(graveyard.toJson()),
     );
     if (response.statusCode != 201) {

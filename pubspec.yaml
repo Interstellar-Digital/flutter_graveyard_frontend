@@ -43,6 +43,8 @@ dependencies:
   uuid: ^3.0.0
   paginated_search_bar: ^1.1.2
   http: ^0.13.4
+  hive: ^2.0.4
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:

@@ -5,6 +5,7 @@ import 'package:flutter_graveyard_frontend/repository/user_repository.dart';
 class UserProvider with ChangeNotifier {
   final UserRepository _userRepository = UserRepository();
   User? _user;
+  String? pageTitle = "";
 
   User? get user => _user;
 
@@ -25,6 +26,10 @@ class UserProvider with ChangeNotifier {
   // add the setUser method
   void setUser(String? userID, String username, String role, String? accessToken) {
     _user = User(userID: userID, username: username, role: role, accessToken: accessToken);
+    notifyListeners();
+  }
+  void setPageTitle(String? title) {
+    pageTitle = title;
     notifyListeners();
   }
 

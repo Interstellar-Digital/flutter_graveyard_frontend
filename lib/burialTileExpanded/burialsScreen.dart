@@ -10,6 +10,7 @@ class BurialScreen extends StatelessWidget {
   final String pageTitle;
   const BurialScreen({super.key, required this.pageTitle});
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

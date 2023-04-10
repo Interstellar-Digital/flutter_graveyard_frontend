@@ -21,12 +21,26 @@ void main() {
 }
 
 class GraveyardManagementSystem extends StatelessWidget {
-  const GraveyardManagementSystem({super.key});
+  const GraveyardManagementSystem({Key? key});
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final user = userProvider.user;
+
     return MaterialApp(
-      home: LoginScreen(),
+      title: 'Graveyard Management System',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      initialRoute: user != null ? '/dashboard' : '/login',
+      routes: {
+        '/login': (context) => LoginScreen(),
+        '/dashboard': (context) => GraveyardDashboard(pageTitle: '', accessToken: ''),
+        '/graveyard-selection': (context) => GraveyardInDistrictSelectionScreen(),
+        '/graves': (context) => GravesScreen(pageTitle: ''),
+        '/burials': (context) => BurialScreen(pageTitle: ''),
+      },
     );
   }
 }

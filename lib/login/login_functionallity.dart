@@ -61,7 +61,7 @@ class LoginDetails extends StatelessWidget {
                 fillColor: Colors.white,
                 hintText: 'Password',
                 contentPadding:
-                    const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(32.0),
                 ),
@@ -90,12 +90,10 @@ class LoginDetails extends StatelessWidget {
                           user.username,
                           user.role,
                           user.accessToken);
+                      Provider.of<UserProvider>(context, listen: false).setPageTitle("Select Graveyard");
                       // navigate to selectgraveyard_screen
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const GraveyardInDistrictSelectionScreen(),
-                        ),
+                      Navigator.of(context).pushReplacementNamed(
+                        '/graveyard-selection',
                       );
                     } else {
                       // show error message if login fails
