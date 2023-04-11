@@ -1,9 +1,9 @@
 class User {
-  String? userID;
+  String? userID = "";
   String username;
-  String? password;
+  String? password = "";
   String role;
-  String? accessToken;
+  String? accessToken = "";
 
   User({
     this.userID,

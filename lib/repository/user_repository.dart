@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_graveyard_frontend/models/user_model.dart';
 
-const String baseUrl = 'https://graveyard-api.onrender.com';
-//const String baseUrl = 'http://localhost:8080';
+//const String baseUrl = 'https://graveyard-api.onrender.com';
+const String baseUrl = 'http://localhost:8080';
 
 class UserRepository {
 
@@ -52,17 +52,29 @@ class UserRepository {
     }
   }
 
-  Future<User?> getUserByUsernameAndPassword(
-      String username, String password) async {
-    final response = await http
-        .get(Uri.parse('$baseUrl/user?username=$username&password=$password'));
+  Future<User?> getUserByUsername(String username) async {
+    final response = await http.get(Uri.parse('$baseUrl/api/users?username=$username'));
 
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
-      return User.fromJson(json);
+      if (json.isNotEmpty) {
+        final userData = json[0];
+        final String id = userData['id'];
+        final String username = userData['username'];
+        final String password = userData['password'];
+        int role = userData['role'];
+        String newRole = "";
+        if (role == 1) {
+          newRole = 'admin';
+        } else if (role == 2) {
+          newRole = 'employee';
+        }
+        return User(userID: id, username: username, role: newRole);
+      } else {
+        return null;
+      }
     } else {
-      throw Exception(
-          'Failed to get user by username and password: ${response.statusCode}');
+      throw Exception('Failed to get user by username: ${response.statusCode}');
     }
   }
 
@@ -82,17 +94,30 @@ class UserRepository {
   }
 
   Future<void> saveUser(User user) async {
-    final response = await http.post(Uri.parse('$baseUrl/users'),
-        body: jsonEncode(user.toJson()),
+    int newRole = 0;
+
+    if (user.role == 'admin') {
+      newRole = 1;
+    } else if (user.role == 'employee') {
+      newRole = 2;
+    }
+
+    final response = await http.post(Uri.parse('$baseUrl/api/users'),
+        body: jsonEncode({
+          'username': user.username,
+          'password': user.password,
+          'role': newRole,
+        }),
         headers: {'Content-Type': 'application/json'});
 
-    if (response.statusCode != 200) {
+    if (response.statusCode != 201) {
       throw Exception('Failed to save user: ${response.statusCode}');
     }
   }
 
-  Future<void> deleteUser(int userId) async {
-    final response = await http.delete(Uri.parse('$baseUrl/users/$userId'));
+  Future<void> deleteUser(String? id, String token) async {
+    final response = await http.delete(Uri.parse('$baseUrl/api/users?id=$id'),
+        headers: {'Authorization': 'Bearer $token'});
 
     if (response.statusCode != 200) {
       throw Exception('Failed to delete user: ${response.statusCode}');

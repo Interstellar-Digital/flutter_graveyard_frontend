@@ -10,10 +10,10 @@ void main() {
       userRepository = UserRepository();
     });
 
-    test('login returns User when successful', () async {
+    test('loginUser', () async {
       // Arrange
-      final username = 'bob';
-      final password = 'password';
+      final username = 'newuser';
+      final password = 'newpassword';
 
       // Act
       final result = await userRepository.login(username, password);
@@ -23,18 +23,47 @@ void main() {
       expect(result!.username, username);
     });
 
-    test('login throws an exception when unsuccessful', () async {
+    test('loginThrowExcep', () async {
       // Arrange
       final username = 'wronguser';
       final password = 'wrongpassword';
 
       // Act & Assert
-      expect(
-            () => userRepository.login(username, password),
-        throwsA(isA<Exception>()),
-      );
+      expect(() => userRepository.login(username, password), throwsA(isA<Exception>()));
+    });
+
+    test('saveUser', () async {
+      // Arrange
+      // final user = User(username: 'emp', password: 'employee', role: 'employee');
+      // final user = User(username: 'newuser', password: 'newpassword', role: 'admin');
+      final user = User(username: 'neweruser', password: 'newerpassword', role: 'employee');
+      // Act
+      await userRepository.saveUser(user);
+
+      // Assert
+      final result = await userRepository.getUserByUsername(user.username);
+      expect(result, isA<User>());
+      expect(result!.userID, isNotNull);
+      expect(result.username, user.username);
+      expect(result.role, user.role);
     });
 
 
+    test('deleteUser', () async {
+      // Arrange
+      final username = 'neweruser';
+      final user = await userRepository.login('newuser', 'newpassword');
+      final userToDelete = await userRepository.getUserByUsername(username);
+
+      // Act
+      final accessToken = user?.accessToken;
+      await userRepository.deleteUser(userToDelete?.userID, accessToken!);
+
+      // Assert
+      expect(() => userRepository.getUserByUsername(username),
+          throwsA(isA<Exception>()));
+    });
   });
+
+
 }
