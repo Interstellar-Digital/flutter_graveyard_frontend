@@ -23,10 +23,11 @@ class GraveyardInDistrict extends StatelessWidget {
           final SharedPreferences prefs = snapshot.data!;
           final accessToken = prefs.getString('accessToken') ?? '';
           final username = prefs.getString('username') ?? '';
+          final userID = prefs.getString('userID') ?? '';
 
 
           return FutureBuilder<List<Graveyard>>(
-            future: GraveyardRepository().getAllGraveyards(accessToken, username),
+            future: GraveyardRepository().getAllGraveyardsForUser(accessToken, userID),
             builder: (BuildContext context, AsyncSnapshot<List<Graveyard>> snapshot) {
               if (snapshot.hasData) {
                 final List<Graveyard> graveyards = snapshot.data!;

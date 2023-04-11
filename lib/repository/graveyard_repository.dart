@@ -4,8 +4,8 @@ import 'package:flutter_graveyard_frontend/models/graveyard_model.dart';
 
 import '../models/user_model.dart';
 
-const String baseUrl = 'https://graveyard-api.onrender.com/api';
-//const String baseUrl = 'http://localhost:8080/api';
+//const String baseUrl = 'https://graveyard-api.onrender.com/api';
+const String baseUrl = 'http://localhost:8080/api';
 
 class GraveyardRepository {
   Future<List<Graveyard>>? getAllGraveyards(String accessToken, String username) async {
@@ -27,8 +27,31 @@ class GraveyardRepository {
     }
   }
 
-  Future<Graveyard?> getGraveyardById(int graveyardId) async {
-    final response = await http.get(Uri.parse('$baseUrl/graveyards?id=$graveyardId'));
+  Future<List<Graveyard>>? getAllGraveyardsForUser(String accessToken, String id) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/graveyards?owner_id=$id'),
+      headers: <String, String>{
+        'Authorization': 'Bearer $accessToken',
+      },
+    );
+    if (response.statusCode == 200) {
+      final List<dynamic> responseBody = json.decode(response.body);
+      final List<Graveyard> graveyards = responseBody
+          .map((dynamic item) => Graveyard.fromJson(item))
+          .toList();
+      return graveyards;
+    } else {
+      throw Exception('Failed to retrieve graveyards: ${response.statusCode}');
+    }
+  }
+
+  Future<Graveyard?> getGraveyardById(String graveyardId, String accessToken) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/graveyards?id=$graveyardId'),
+      headers: <String, String>{
+        'Authorization': 'Bearer $accessToken',
+      },
+    );
     if (response.statusCode == 200) {
       final dynamic responseBody = json.decode(response.body);
       return Graveyard.fromJson(responseBody);
@@ -56,7 +79,7 @@ class GraveyardRepository {
     }
   }
 
-  Future<void> deleteGraveyard(int graveyardId) async {
+  Future<void> deleteGraveyard(String graveyardId) async {
     final response = await http.delete(Uri.parse('$baseUrl/graveyards?id=$graveyardId'));
     if (response.statusCode != 200) {
       throw Exception('Failed to delete graveyard');
