@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_graveyard_frontend/repository/grave_repository.dart';
 
 class AddGravePopup extends StatelessWidget {
   const AddGravePopup({
@@ -7,10 +9,11 @@ class AddGravePopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final plotNumberController = TextEditingController();
     return AlertDialog(
-      title: const Text('Add a Grave',textAlign: TextAlign.center,),
+      title: const Text('Add a Grave', textAlign: TextAlign.center),
       content: SizedBox(
-        height: 200,
+        height: 150,
         child: Column(
           children: [
             Row(
@@ -23,22 +26,16 @@ class AddGravePopup extends StatelessWidget {
               ],
             ),
             Row(
-              children: const [
+              children: [
                 Text('Plot Number'),
                 SizedBox(
                   width: 30,
                 ),
-                Expanded(child: TextField()),
-              ],
-            ),
-            Row(
-              children: const [
-                Text('Date'),
-                SizedBox(
-                  width: 30,
-                ),
                 Expanded(
-                  child: TextField(),
+                  child: TextField(
+                    controller: plotNumberController,
+                    keyboardType: TextInputType.number,
+                  ),
                 ),
               ],
             ),
@@ -47,13 +44,40 @@ class AddGravePopup extends StatelessWidget {
       ),
       actions: <Widget>[
         TextButton(
-          onPressed: () =>
-              Navigator.pop(context, 'Cancel'),
+          onPressed: () => Navigator.pop(context, 'Cancel'),
           child: const Text('Cancel'),
         ),
         TextButton(
-          onPressed: () =>
-              Navigator.pop(context, 'OK'),
+          onPressed: () async {
+            final sharedPreferences = await SharedPreferences.getInstance();
+            final accessToken = sharedPreferences.getString('accessToken');
+            final graveyardID = sharedPreferences.getString('graveyardID');
+            final plotNumber = plotNumberController.text;
+            if (int.tryParse(plotNumber) == null) {
+              // Show an error message if plotNumber is not an integer
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Plot Number should be an integer value'),
+                ),
+              );
+              return;
+            }
+            try {
+              await GraveRepository().saveGrave(plotNumber, accessToken!, graveyardID!);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Grave successfully added'),
+                ),
+              );
+              Navigator.pop(context, 'OK');
+            } catch (e) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Failed to add grave'),
+                ),
+              );
+            }
+          },
           child: const Text('OK'),
         ),
       ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_graveyard_frontend/graveyardDashboard/dashboardScreen.dart';
 import 'package:flutter_graveyard_frontend/models/graveyard_model.dart';
 import 'package:flutter_graveyard_frontend/providers/user_provider.dart';
+import 'package:flutter_graveyard_frontend/providers/graveyard_provider.dart';
 import 'package:flutter_graveyard_frontend/repository/graveyard_repository.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,6 +14,7 @@ class GraveyardInDistrict extends StatelessWidget {
   Widget build(BuildContext context) {
     EdgeInsets padding = EdgeInsets.only(top: 50);
     final userProvider = Provider.of<UserProvider>(context);
+    final graveyardProvider = Provider.of<GraveyardProvider>(context);
 
     return FutureBuilder<SharedPreferences>(
       future: SharedPreferences.getInstance(),
@@ -22,7 +24,7 @@ class GraveyardInDistrict extends StatelessWidget {
           final accessToken = prefs.getString('accessToken') ?? '';
           final username = prefs.getString('username') ?? '';
 
-          print('Access Token: $accessToken, Username: $username');
+          //print('Access Token: $accessToken, Username: $username');
 
           return FutureBuilder<List<Graveyard>>(
             future: GraveyardRepository().getAllGraveyards(accessToken, username),
@@ -47,15 +49,8 @@ class GraveyardInDistrict extends StatelessWidget {
                         final graveyard = graveyards[index];
                         return GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (BuildContext context) => GraveyardDashboard(
-                                  pageTitle: '${graveyard.name}',
-                                  accessToken: accessToken,
-                                ),
-                              ),
-                            );
+                            graveyardProvider.setGraveyardID(graveyard.graveyardID!, graveyard.name); // Set the selected graveyard ID to the state
+                            Navigator.pushNamed(context, '/dashboard');
                           },
                           child: Card(
                             color: Color.fromRGBO(185, 243, 252, 1),

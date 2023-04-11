@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_graveyard_frontend/profile/adminProfile.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_graveyard_frontend/providers/user_provider.dart';
-import 'package:flutter_graveyard_frontend/profile/adminProfile.dart';
+import 'package:flutter_graveyard_frontend/providers/graveyard_provider.dart';
 
 PreferredSize NavBar({
   required void Function()? onPressCallBack,
@@ -51,8 +51,9 @@ PreferredSize NavBar({
               ),
               IconButton(
                 icon: Icon(Icons.logout),
-                onPressed: () {
-                  //Provider.of<UserProvider>(context, listen: false).logout();
+                onPressed: () async {
+                  await Provider.of<UserProvider>(context, listen: false).logout();
+                  await Provider.of<GraveyardProvider>(context, listen: false).clearGraveyardIDAndName();
                   Navigator.of(context).pushReplacementNamed(
                     '/login',
                   );

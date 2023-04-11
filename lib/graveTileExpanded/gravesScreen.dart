@@ -6,6 +6,9 @@ import 'package:flutter_graveyard_frontend/graveTileExpanded/gravesUsedplots.dar
 import 'package:flutter_graveyard_frontend/graveTileExpanded/removePopup.dart';
 import 'package:flutter_graveyard_frontend/graveTileExpanded/updateGravePricePopup.dart';
 import 'package:flutter_graveyard_frontend/navBar/navigationBar.dart';
+import 'package:flutter_graveyard_frontend/providers/graveyard_provider.dart';
+import 'package:flutter_graveyard_frontend/repository/grave_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GravesScreen extends StatelessWidget {
   final String pageTitle;
@@ -13,6 +16,18 @@ class GravesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SharedPreferences.getInstance().then((prefs) {
+      final graveyardId = prefs.getString('graveyardID');
+      final accessToken = prefs.getString("accessToken");
+
+
+      // GraveRepository().getGravesByGraveyardId(graveyardId!, accessToken!).then((graves) {
+      //   print("Graves: $graves");
+      // }).catchError((error) {
+      //   print("Error: $error");
+      // });
+    });
+
     return Scaffold(
       appBar: NavBar(
           context: context,

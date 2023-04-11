@@ -6,13 +6,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 class UserProvider with ChangeNotifier {
   final UserRepository _userRepository = UserRepository();
   User? _user;
-  String? pageTitle = "";
+  String? _pageTitle = '';
 
   User? get user => _user;
 
-  String? get role => _user?.role; // get method for role property
+  String? get role => _user?.role;
+
+  String? get pageTitle => _pageTitle;
+
   UserProvider() {
-    loadUserFromPrefs(); // add this line
+    loadUserFromPrefs();
   }
 
   Future<void> saveUserToPrefs() async {
@@ -31,7 +34,11 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> logout() async {
-    await _userRepository.logout();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userID', '');
+    await prefs.setString('username', '');
+    await prefs.setString('role', '');
+    await prefs.setString('accessToken', '');
     _user = null;
     notifyListeners();
   }
@@ -53,11 +60,13 @@ class UserProvider with ChangeNotifier {
     saveUserToPrefs();
     notifyListeners();
   }
-  void setPageTitle(String? title) {
-    pageTitle = title;
+
+  Future<void> setPageTitle(String? title) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    _pageTitle = title;
+    await prefs.setString('pageTitle', title ?? '');
     notifyListeners();
   }
-
 
   String? get userId => _user?.userID;
 
