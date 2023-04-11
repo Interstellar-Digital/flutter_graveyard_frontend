@@ -61,6 +61,22 @@ void main() {
       expect(savedGraveyard.numberOfPlots, equals(tempGraveyard.numberOfPlots));
     });
 
+    test('deleteGraveyard', () async {
+      // Arrange
+
+      final graveyardName = 'Test Graveyard';
+      final graveyard = await graveyardRepository.getGraveyardByName(graveyardName, accessToken);
+      final graveyardId = graveyard?.graveyardID;
+
+      // Act
+      await graveyardRepository.deleteGraveyard(graveyardId!, accessToken);
+
+      // Assert
+      expect(() => graveyardRepository.getGraveyardById(graveyardId, accessToken),
+          throwsA(isA<Exception>()));
+    });
+
+
 
   });
 }

@@ -59,6 +59,30 @@ class GraveyardRepository {
       throw Exception('Failed to retrieve graveyard');
     }
   }
+  Future<Graveyard?> getGraveyardByName(String graveyardName, String accessToken) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/graveyards?name=$graveyardName'),
+      headers: <String, String>{
+        'Authorization': 'Bearer $accessToken',
+      },
+    );
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      if (json.isNotEmpty) {
+        final graveyardData = json[0];
+        final String id = graveyardData['id'];
+        final int max_plots = graveyardData['max_plots'];
+        final String graveyardName = graveyardData['name'];
+        final String graveyardLocation = graveyardData['location'];
+
+        return Graveyard(graveyardID: id, name: graveyardName, location: graveyardLocation, numberOfPlots: max_plots);
+      } else {
+        return null;
+      }
+    } else {
+      throw Exception('Failed to retrieve graveyard');
+    }
+  }
 
   Future<void> saveGraveyard(Graveyard graveyard, String userID, String accessToken) async {
     final response = await http.post(
@@ -79,8 +103,13 @@ class GraveyardRepository {
     }
   }
 
-  Future<void> deleteGraveyard(String graveyardId) async {
-    final response = await http.delete(Uri.parse('$baseUrl/graveyards?id=$graveyardId'));
+  Future<void> deleteGraveyard(String graveyardId, String accessToken) async {
+    final response = await http.delete(
+      Uri.parse('$baseUrl/graveyards?id=$graveyardId'),
+      headers: <String, String>{
+        'Authorization': 'Bearer $accessToken',
+      },
+    );
     if (response.statusCode != 200) {
       throw Exception('Failed to delete graveyard');
     }
