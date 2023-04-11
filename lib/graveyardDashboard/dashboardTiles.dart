@@ -4,7 +4,6 @@ import 'package:flutter_graveyard_frontend/notificationTileExpanded/notification
 import 'package:flutter_graveyard_frontend/paymentTileExpaned/paymentScreen.dart';
 import 'package:flutter_graveyard_frontend/reportTileExpanded/reportScreen.dart';
 import 'package:flutter_graveyard_frontend/reservationTileExpanded/reservationScreen.dart';
-
 import '../burialTileExpanded/burialsScreen.dart';
 
 class GraveyardDashboardTiles extends StatelessWidget {
@@ -12,8 +11,30 @@ class GraveyardDashboardTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> items = [      'Graves',      'Burials',      'Reservations',      'Report',      'Payments',      'Notifications',    ];
-    final List<String> images = [      'assets/graves.png',      'assets/openGraves.png',      'assets/reservedGraves.png',      'assets/report.png',      'assets/payment.png',      'assets/notification.png',    ];
+    final List<String> items = [
+      'Graves',
+      'Burials',
+      'Reservations',
+      'Report',
+      'Payments',
+      'Notifications',
+    ];
+    final List<String> images = [
+      'assets/graves.png',
+      'assets/openGraves.png',
+      'assets/reservedGraves.png',
+      'assets/report.png',
+      'assets/payment.png',
+      'assets/notification.png',
+    ];
+    final List<String> routes = [
+      '/graves',
+      '/burials',
+      '/reservations',
+      '/report',
+      '/payments',
+      '/notifications',
+    ];
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: MediaQuery.of(context).size.width * 0.15,
@@ -30,28 +51,7 @@ class GraveyardDashboardTiles extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (BuildContext context) {
-                  if ('${items[index]}' == 'Graves') {
-                    return GravesScreen(pageTitle: '${items[index]}');
-                  }
-                  if ('${items[index]}' == 'Burials') {
-                    return BurialScreen(pageTitle: '${items[index]}');
-                  }
-                  if ('${items[index]}' == 'Reservations') {
-                    return ReservationScreen(pageTitle: '${items[index]}');
-                  }
-                  if ('${items[index]}' == 'Report') {
-                    return ReportScreen(pageTitle: '${items[index]}');
-                  }
-                  if ('${items[index]}' == 'Payments') {
-                    return PaymentScreen(pageTitle: '${items[index]}');
-                  }
-
-                  return NotificationScreen(pageTitle: '${items[index]}');
-                }),
-              );
+              Navigator.pushNamed(context, routes[index]);
             },
             child: Card(
               color: Color.fromRGBO(185, 243, 252, 1),
@@ -61,12 +61,12 @@ class GraveyardDashboardTiles extends StatelessWidget {
                   Expanded(
                     flex: 5,
                     child: Image.asset(
-                      '${images[index]}',
+                      images[index],
                     ),
                   ),
                   Expanded(
                     child: Text(
-                      '${items[index]}',
+                      items[index],
                       style: TextStyle(fontSize: 24.0),
                       textAlign: TextAlign.center,
                     ),

@@ -24,7 +24,6 @@ class GraveyardInDistrict extends StatelessWidget {
           final accessToken = prefs.getString('accessToken') ?? '';
           final username = prefs.getString('username') ?? '';
 
-          //print('Access Token: $accessToken, Username: $username');
 
           return FutureBuilder<List<Graveyard>>(
             future: GraveyardRepository().getAllGraveyards(accessToken, username),

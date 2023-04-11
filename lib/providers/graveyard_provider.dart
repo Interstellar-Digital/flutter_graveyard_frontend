@@ -45,6 +45,7 @@ class GraveyardProvider with ChangeNotifier {
     final name = prefs.getString('graveyardName') ?? '';
     graveyardID = id;
     graveyardName = name;
+    notifyListeners();
   }
 
   Future<void> clearGraveyardIDAndName() async {
@@ -53,5 +54,6 @@ class GraveyardProvider with ChangeNotifier {
     await prefs.remove('graveyardName');
     graveyardID = '';
     graveyardName = '';
+    notifyListeners();
   }
 }

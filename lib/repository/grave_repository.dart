@@ -7,8 +7,6 @@ import 'package:http/http.dart' as http;
 const String baseUrl = 'http://localhost:8080';
 class GraveRepository {
   Future<List<Grave>?> getGravesByGraveyardId(String graveyardId, String accessToken) async {
-    print(accessToken);
-    print(graveyardId);
     final response = await http.get(
       Uri.parse('$baseUrl/api/graves?graveyard_id=$graveyardId'),
       headers: <String, String>{

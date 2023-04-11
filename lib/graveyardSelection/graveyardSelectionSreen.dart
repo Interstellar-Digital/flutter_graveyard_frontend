@@ -87,12 +87,10 @@ class GraveyardInDistrictSelectionScreen extends StatelessWidget {
                       final graveyard = Graveyard(name: name,
                           location: location,
                           numberOfPlots: maxPlots);
-                      SharedPreferences prefs = await SharedPreferences
-                          .getInstance();
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
                       final accessToken = prefs.getString('accessToken') ?? '';
                       final userID = prefs.getString('userID') ?? '';
-                      await graveyardRepository.saveGraveyard(
-                          graveyard, userID, accessToken);
+                      await graveyardRepository.saveGraveyard(graveyard, userID, accessToken);
                       Navigator.pop(context);
                     },
                   ),

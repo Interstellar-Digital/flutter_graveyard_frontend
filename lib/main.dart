@@ -4,11 +4,16 @@ import 'package:flutter_graveyard_frontend/graveTileExpanded/gravesScreen.dart';
 import 'package:flutter_graveyard_frontend/graveyardSelection/graveyardSelectionSreen.dart';
 import 'package:flutter_graveyard_frontend/graveyardDashboard/dashboardScreen.dart';
 import 'package:flutter_graveyard_frontend/login/login_screen.dart';
+import 'package:flutter_graveyard_frontend/paymentTileExpaned/paymentScreen.dart';
 import 'package:flutter_graveyard_frontend/providers/graveyard_provider.dart';
+import 'package:flutter_graveyard_frontend/reportTileExpanded/reportScreen.dart';
+import 'package:flutter_graveyard_frontend/reservationTileExpanded/reservationScreen.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_graveyard_frontend/providers/user_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'notificationTileExpanded/notificationScreen.dart';
 
 void main() async {
   // Retrieve the values from SharedPreferences
@@ -52,8 +57,12 @@ class GraveyardManagementSystem extends StatelessWidget {
         ),
         '/graveyard-selection': (context) =>
             GraveyardInDistrictSelectionScreen(),
-        '/graves': (context) => GravesScreen(pageTitle: ''),
-        '/burials': (context) => BurialScreen(pageTitle: ''),
+        '/graves': (context) => GravesScreen(pageTitle: 'Graves'),
+        '/burials': (context) => BurialScreen(pageTitle: 'Burials'),
+        '/reservations': (context) => ReservationScreen(pageTitle: 'Reservations'),
+        '/report': (context) => ReportScreen(pageTitle: 'Report'),
+        '/payments': (context) => PaymentScreen(pageTitle: 'Payments'),
+        '/notifications': (context) => NotificationScreen(pageTitle: 'Notifications'),
       },
     );
   }
