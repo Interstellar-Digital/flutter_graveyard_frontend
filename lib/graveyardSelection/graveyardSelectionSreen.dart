@@ -34,7 +34,7 @@ class GraveyardInDistrictSelectionScreen extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
-        onPressed: () {
+        onPressed: () async {
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -68,7 +68,7 @@ class GraveyardInDistrictSelectionScreen extends StatelessWidget {
                         hintText: 'Max Plots',
                       ),
                       onChanged: (value) {
-                        maxPlots = int.tryParse(value)!;
+                        maxPlots = int.tryParse(value) ?? 0;
                       },
                     ),
                   ],
@@ -84,14 +84,19 @@ class GraveyardInDistrictSelectionScreen extends StatelessWidget {
                     child: Text('Save'),
                     onPressed: () async {
                       final graveyardRepository = GraveyardRepository();
-                      final graveyard = Graveyard(name: name,
+                      final graveyard = Graveyard(
+                          name: name,
                           location: location,
                           numberOfPlots: maxPlots);
-                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
                       final accessToken = prefs.getString('accessToken') ?? '';
                       final userID = prefs.getString('userID') ?? '';
-                      await graveyardRepository.saveGraveyard(graveyard, userID, accessToken);
+                      await graveyardRepository.saveGraveyard(
+                          graveyard, userID, accessToken);
                       Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Graveyard added successfully')));
                     },
                   ),
                 ],
