@@ -48,6 +48,12 @@ void main() {
       expect(availableGraves.length, greaterThan(0));
     });
 
+    test('getUnavailableGraves', () async {
+      final unavailableGraves = await graveRepository.getUnavailableGraves(accessToken);
+      expect(unavailableGraves, isA<List<Grave>>());
+      expect(unavailableGraves.length, greaterThanOrEqualTo(0));
+    });
+
     test('deleteGrave', () async {
       // Get the graves associated with the user logged in
       final graves = await graveRepository.getGravesByGraveyardId(graveyardID!, accessToken);

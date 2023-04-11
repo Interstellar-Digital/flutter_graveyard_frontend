@@ -81,4 +81,21 @@ class GraveRepository {
       throw Exception('Failed to load available graves');
     }
   }
+
+  Future<List<Grave>> getUnavailableGraves(String accessToken) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/api/graves/unavailable'),
+      headers: <String, String>{
+        'Authorization': 'Bearer $accessToken',
+      },
+    );
+    if (response.statusCode == 200) {
+      final List<dynamic> gravesJson = jsonDecode(response.body);
+      final List<Grave> graves =
+      gravesJson.map((e) => Grave.fromJson(e)).toList();
+      return graves;
+    } else {
+      throw Exception('Failed to load available graves');
+    }
+  }
 }
