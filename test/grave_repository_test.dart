@@ -4,6 +4,7 @@ import 'package:flutter_graveyard_frontend/repository/user_repository.dart';
 import 'package:flutter_graveyard_frontend/repository/graveyard_repository.dart';
 import 'package:flutter_graveyard_frontend/repository/grave_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   group('GraveRepository', () {
@@ -64,11 +65,48 @@ void main() {
       expect(grave, isNotNull);
 
       // Delete the grave
-      await graveRepository.deleteGrave(grave.graveID!, accessToken);
+      await graveRepository.deleteGrave(grave.graveID, accessToken);
       final updatedGraves = await graveRepository.getGravesByGraveyardId(graveyardID!, accessToken);
 
       // Check that the deleted grave is no longer in the list of graves
       expect(updatedGraves!.any((g) => g.graveID == grave.graveID), isFalse);
+    });
+
+    /// updateGrave test case
+    /// It retrieves a list of graves using the getGravesByGraveyardId method.
+    /// It chooses a random grave from the list and saves its original date.
+    /// It updates the date of the chosen grave using the updateGrave method.
+    /// It retrieves the updated grave using the getGraveById method and verifies that its date was updated to the new value.
+    /// It reverts the changes made to the grave for future tests.
+    test('updateGrave', () async {
+      // Get a list of graves
+      final graves = await graveRepository.getGravesByGraveyardId(graveyardID!, accessToken);
+      expect(graves, isA<List<Grave>>());
+
+      // Choose a random grave to update
+      final randomGrave = graves!.first;
+      final originalDate = randomGrave.lastBuried;
+      final newDate = '2023-04-30';
+
+      // Update the grave
+      await graveRepository.updateGrave(randomGrave.graveID, newDate, accessToken);
+
+      // Verify that the grave was updated
+      final updatedGrave = await graveRepository.getGraveById(randomGrave.graveID, accessToken);
+      expect(updatedGrave, isNotNull);
+
+      // Convert the dates to DateTime objects and compare just the date, month, and year
+      final expectedDate = DateTime.parse('2023-04-30');
+      //DateFormat('E, dd MMM yyyy HH:mm:ss').parse(updatedGrave!.lastBuried);
+      final parsedDate = DateFormat('E, dd MMM yyyy HH:mm:ss').parse(updatedGrave!.lastBuried);
+      final actualFormattedDate = DateFormat('yyyy-MM-dd').format(parsedDate);
+      final expectedFormattedDate = DateFormat('yyyy-MM-dd').format(expectedDate);
+      expect(actualFormattedDate, equals(expectedFormattedDate));
+
+      // Revert the changes for future tests
+      final originalparsedDate = DateFormat('E, dd MMM yyyy HH:mm:ss').parse(originalDate);
+      final originalFormattedDate = DateFormat('yyyy-MM-dd').format(originalparsedDate);
+      await graveRepository.updateGrave(randomGrave.graveID, originalFormattedDate, accessToken);
     });
 
   });
