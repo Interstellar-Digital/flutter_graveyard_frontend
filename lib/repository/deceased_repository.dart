@@ -132,4 +132,27 @@ class DeceasedRepository {
       return false;
     }
   }
+
+  /// Deletes the deceased record with the given ID from the API using the provided access token.
+  /// @param id The ID of the deceased record to be deleted.
+  /// @param accessToken The access token required for API authentication and authorization.
+  /// @return A Future object representing a boolean value indicating the success or failure of the delete operation.
+  ///
+  /// Returns true if the operation was successful, and false otherwise.
+  /// @throws Exception if there is an error with the HTTP request/response or if the API returns an error.
+  Future<bool> deleteDeceased(String id, String accessToken) async {
+    final response = await http.delete(
+      Uri.parse('$baseUrl/api/deceaseds?id=$id'),
+      headers: <String, String>{
+        'Authorization': 'Bearer $accessToken',
+      },
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      print('Error: ${response.statusCode} - ${response.reasonPhrase}');
+      return false;
+    }
+  }
+
 }

@@ -35,7 +35,7 @@ void main() {
       graveyardID = graveyard?.graveyardID;
       // Get a list of graves
       final graves = await graveRepository.getGravesByGraveyardId(graveyardID!, accessToken);
-      final randomGrave = graves!.last;
+      final randomGrave = graves!.elementAt(1);
       graveID = randomGrave.graveID;
     });
 
@@ -45,8 +45,6 @@ void main() {
       final dateOfBirth = '1990-01-01';
       final dateOfDeath = '2021-04-01';
       final causeOfDeath = 'Natural Causes';
-
-      print(graveID);
       // Act
       final result = await deceasedRepository.createDeceased(name, dateOfBirth, dateOfDeath, causeOfDeath, graveID, accessToken);
 
@@ -54,7 +52,7 @@ void main() {
       expect(result, equals(expectedResponse));
     });
 
-    test('getAllDeceased returns a list of deceased', () async {
+    test('getAllDeceased', () async {
       // Act
       final result = await deceasedRepository.getAllDeceased(accessToken);
 
@@ -63,7 +61,7 @@ void main() {
       expect(result is List<Deceased>, isTrue);
     });
 
-    test('getAllDeceased returns null if the API call fails', () async {
+    test('getAllDeceasedWithInvalidToken', () async {
       // Arrange
       final invalidToken = 'invalid_token';
 
@@ -72,6 +70,21 @@ void main() {
 
       // Assert
       expect(result, isNull);
+    });
+
+    test('deleteDeceased', () async {
+      // Arrange
+
+      final deceased = await deceasedRepository.getAllDeceased(accessToken);
+      final id = deceased?.firstWhere((d) => d.graveId == graveID).deceasedID;
+
+      // Act
+      final deleteResult = await deceasedRepository.deleteDeceased(id, accessToken);
+
+      // Assert
+      expect(deleteResult, equals(true));
+      final updatedDeceased = await deceasedRepository.getAllDeceased(accessToken);
+      expect(updatedDeceased?.any((d) => d.deceasedID == id), equals(false));
     });
 
   });

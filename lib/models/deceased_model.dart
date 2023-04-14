@@ -15,6 +15,8 @@ class Deceased {
     required this.graveId,
   });
 
+  get deceasedID => id;
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
