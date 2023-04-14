@@ -61,6 +61,19 @@ void main() {
       expect(updatedCustomer.phoneNumber, newPhoneNumber);
     });
 
+    test('updateCustomerEmail', () async {
+      final customerName = 'John Doe';
+      final newEmail = 'NewJohn@gmail.com';
+      final allCustomers = await customerRepository.getAllCustomers(accessToken);
+      final customerToUpdate = allCustomers.firstWhere((customer) => customer.name == customerName);
+      final customerId = customerToUpdate.id;
+      await customerRepository.updateCustomerByEmail(accessToken, customerId, newEmail);
+
+      // retrieve the updated customer to check the new phone number
+      final updatedCustomer = await customerRepository.getCustomerById(customerId, accessToken);
+      expect(updatedCustomer.emailAddress, newEmail);
+    });
+
 
   });
 }
