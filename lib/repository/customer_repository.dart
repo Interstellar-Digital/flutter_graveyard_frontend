@@ -18,13 +18,13 @@ class CustomerRepository {
     }
   }
 
-  Future<Customer> getCustomerById(String id, String accessTokens) async {
+  Future<Customer?> getCustomerById(String id, String accessTokens) async {
     final response = await http.get(Uri.parse('$baseUrl/api/customers?id=$id'), headers: {"Authorization": "Bearer $accessTokens"});
     if (response.statusCode == 200) {
       final dynamic customerJson = jsonDecode(response.body);
       return Customer.fromJson(customerJson);
     } else if (response.statusCode == 404) {
-      throw Exception('Customer not found');
+      return null;
     } else {
       throw Exception('Failed to load customer');
     }
@@ -114,7 +114,7 @@ class CustomerRepository {
   }
 
   Future<void> deleteCustomer(String id, String accessToken) async {
-    final url = Uri.parse('/api/customers?id=$id');
+    final url = Uri.parse('$baseUrl/api/customers?id=$id');
     final response = await http.delete(url, headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $accessToken',

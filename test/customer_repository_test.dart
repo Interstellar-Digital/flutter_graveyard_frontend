@@ -32,11 +32,29 @@ void main() {
     });
 
     test('createCustomer', () async {
-      final customerName = 'John Doe';
+      final customerName = 'Jonothan Doe';
       final customerPhoneNumber = '123-456-7890';
-      final customerEmailAddress = 'johndoe@example.com';
+      final customerEmailAddress = 'johnodoe@example.com';
 
       await customerRepository.createCustomer(accessToken, customerName, customerPhoneNumber, customerEmailAddress);
+
+      // Verify that the customer was successfully created by trying to get it
+      final allCustomers = await customerRepository.getAllCustomers(accessToken);
+      final createdCustomer = allCustomers.firstWhere((customer) => customer.name == customerName);
+
+      expect(createdCustomer, isNotNull);
+      expect(createdCustomer.name, equals(customerName));
+      expect(createdCustomer.phoneNumber, equals(customerPhoneNumber));
+      expect(createdCustomer.emailAddress, equals(customerEmailAddress));
+    });
+
+    test('createCustomerWithId', () async {
+      final customerID = "awdq1qwa12s";
+      final customerName = 'Nick Defreitas';
+      final customerPhoneNumber = '123-456-7890';
+      final customerEmailAddress = 'johnodoe@example.com';
+
+      await customerRepository.createCustomer(accessToken, customerName, customerPhoneNumber, customerEmailAddress, id: customerID);
 
       // Verify that the customer was successfully created by trying to get it
       final allCustomers = await customerRepository.getAllCustomers(accessToken);
@@ -58,7 +76,7 @@ void main() {
 
       // retrieve the updated customer to check the new phone number
       final updatedCustomer = await customerRepository.getCustomerById(customerId, accessToken);
-      expect(updatedCustomer.phoneNumber, newPhoneNumber);
+      expect(updatedCustomer?.phoneNumber, newPhoneNumber);
     });
 
     test('updateCustomerEmail', () async {
@@ -71,7 +89,26 @@ void main() {
 
       // retrieve the updated customer to check the new phone number
       final updatedCustomer = await customerRepository.getCustomerById(customerId, accessToken);
-      expect(updatedCustomer.emailAddress, newEmail);
+      expect(updatedCustomer?.emailAddress, newEmail);
+    });
+
+    test("deleteCustomer", () async {
+      final customerID = "qrwasd12weq2";
+      final customerName = 'Customer Deleted';
+      final customerPhoneNumber = '123-456-7890';
+      final customerEmailAddress = 'testdeleter@example.com';
+
+      await customerRepository.createCustomer(accessToken, customerName, customerPhoneNumber, customerEmailAddress, id: customerID);
+
+      // Verify that the customer was successfully created by trying to get it
+      final customerToDelete = await customerRepository.getCustomerById(customerID, accessToken);
+      // Assert
+      expect(customerToDelete, isNotNull);
+      expect(customerToDelete is Customer, isTrue);
+
+      await customerRepository.deleteCustomer(customerID, accessToken);
+      final customerDeleted = await customerRepository.getCustomerById(customerID, accessToken);
+      expect(customerDeleted, isNull);
     });
 
 
