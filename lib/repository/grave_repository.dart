@@ -84,8 +84,7 @@ class GraveRepository {
     );
     if (response.statusCode == 200) {
       final List<dynamic> gravesJson = jsonDecode(response.body);
-      final List<Grave> graves =
-      gravesJson.map((e) => Grave.fromJson(e)).toList();
+      final List<Grave> graves = gravesJson.map((e) => Grave.fromJson(e)).toList();
       return graves;
     } else {
       throw Exception('Failed to load available graves');
