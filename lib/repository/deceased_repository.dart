@@ -2,8 +2,8 @@ import 'package:flutter_graveyard_frontend/models/deceased_model.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-//const String baseUrl = 'https://graveyard-api.onrender.com';
-const String baseUrl = 'http://localhost:8080';
+const String baseUrl = 'https://graveyard-api.onrender.com';
+//const String baseUrl = 'http://localhost:8080';
 
 class DeceasedRepository {
   Future<List<Deceased>?> getDeceasedByGraveId(
