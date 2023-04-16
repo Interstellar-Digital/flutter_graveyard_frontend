@@ -7,11 +7,20 @@ class UsedPlots extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal:15,),
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Used Plots'),
+            Text(
+              'Used Plots',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18.0,
+              ),
+            ),
+            SizedBox(height: 10.0),
             Divider(),
+            SizedBox(height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -19,12 +28,19 @@ class UsedPlots extends StatelessWidget {
                 Text('SingleHolder'),
               ],
             ),
+            SizedBox(height: 10.0),
             Divider(),
+            SizedBox(height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text('Companion'), Text('Number')],
+              children: [
+                Text('Companion'),
+                Text('Number'),
+              ],
             ),
+            SizedBox(height: 10.0),
             Divider(),
+            SizedBox(height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -32,7 +48,9 @@ class UsedPlots extends StatelessWidget {
                 Text('Number'),
               ],
             ),
+            SizedBox(height: 10.0),
             Divider(),
+            SizedBox(height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -40,7 +58,9 @@ class UsedPlots extends StatelessWidget {
                 Text('Number'),
               ],
             ),
+            SizedBox(height: 10.0),
             Divider(),
+            SizedBox(height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -48,6 +68,7 @@ class UsedPlots extends StatelessWidget {
                 Text('Number'),
               ],
             ),
+            SizedBox(height: 10.0),
           ],
         ),
       ),

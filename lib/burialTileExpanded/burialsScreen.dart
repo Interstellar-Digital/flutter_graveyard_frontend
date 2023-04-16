@@ -4,20 +4,23 @@ import 'package:flutter_graveyard_frontend/navBar/navigationBar.dart';
 import 'package:paginated_search_bar/paginated_search_bar.dart';
 
 import 'addBurial.dart';
-import 'graveSearchBar.dart';
+import 'graveSearchbar.dart';
 
 class BurialScreen extends StatelessWidget {
   final String pageTitle;
   const BurialScreen({super.key, required this.pageTitle});
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: NavBar(context: context,
+        appBar: NavBar(
+            context: context,
             onPressCallBack: () {
               Navigator.pop(context);
             },
-            pageTitle: pageTitle),
+            pageTitle: pageTitle,
+            showBackArrow: true),
         body: Column(
           children: [
             Padding(
