@@ -52,8 +52,10 @@ PreferredSize NavBar({
               IconButton(
                 icon: Icon(Icons.logout),
                 onPressed: () async {
-                  await Provider.of<UserProvider>(context, listen: false).logout();
-                  await Provider.of<GraveyardProvider>(context, listen: false).clearGraveyardIDAndName();
+                  await Provider.of<UserProvider>(context, listen: false)
+                      .logout();
+                  await Provider.of<GraveyardProvider>(context, listen: false)
+                      .clearGraveyardIDAndName();
                   Navigator.of(context).pushReplacementNamed(
                     '/login',
                   );

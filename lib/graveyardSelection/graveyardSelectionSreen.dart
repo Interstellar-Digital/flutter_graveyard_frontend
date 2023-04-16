@@ -8,9 +8,14 @@ import 'package:provider/provider.dart';
 import 'package:flutter_graveyard_frontend/providers/user_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class GraveyardInDistrictSelectionScreen extends StatelessWidget {
+class GraveyardInDistrictSelectionScreen extends StatefulWidget {
   const GraveyardInDistrictSelectionScreen({Key? key}) : super(key: key);
 
+  @override
+  State<GraveyardInDistrictSelectionScreen> createState() => _GraveyardInDistrictSelectionScreenState();
+}
+
+class _GraveyardInDistrictSelectionScreenState extends State<GraveyardInDistrictSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
@@ -82,7 +87,8 @@ class GraveyardInDistrictSelectionScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                     child: Text('Save'),
-                    onPressed: () async {
+                    onPressed: () async
+                     {
                       final graveyardRepository = GraveyardRepository();
                       final graveyard = Graveyard(
                           name: name,
@@ -97,9 +103,14 @@ class GraveyardInDistrictSelectionScreen extends StatelessWidget {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Graveyard added successfully')));
+                          setState(() {
+                            
+                          });
                     },
+
                   ),
                 ],
+
               );
             },
           );
