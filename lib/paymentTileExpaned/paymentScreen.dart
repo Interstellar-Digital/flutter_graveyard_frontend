@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_graveyard_frontend/navBar/navigationBar.dart';
+import 'package:flutter_graveyard_frontend/paymentTileExpaned/paymentDetails.dart';
 
 class PaymentScreen extends StatelessWidget {
   final String pageTitle;
@@ -13,13 +14,11 @@ class PaymentScreen extends StatelessWidget {
           onPressCallBack: () {
             Navigator.pop(context);
           },
-          pageTitle: pageTitle,
-          showBackArrow: true),
+          pageTitle: pageTitle),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Nothing here yet'),
+            PaymentDetail(),
           ],
         ),
       ),
