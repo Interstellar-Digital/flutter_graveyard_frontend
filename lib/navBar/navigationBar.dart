@@ -42,12 +42,13 @@ PreferredSize NavBar({
                 },
                 child: Image.asset(
                   'assets/usericon.png',
-                  width: 30,
+                  width: 40,
+                  height: 40,
                 ),
               ),
               Image.asset(
                 'assets/AddUser.png',
-                width: 30,
+                width: 25,
               ),
               IconButton(
                 icon: Icon(Icons.logout),
