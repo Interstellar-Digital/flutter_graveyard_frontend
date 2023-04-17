@@ -24,4 +24,3 @@ class ReportScreen extends StatelessWidget {
         ));
   }
 }
-
