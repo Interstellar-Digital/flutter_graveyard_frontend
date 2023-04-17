@@ -20,42 +20,27 @@ class ReportTable extends StatelessWidget {
                 Text('>')
               ],
             ),
-            Expanded(
-              child: Container(
-                color: Colors.grey,
-                child: Column(
-                  children: [
-                    Table(
-                      border: TableBorder.all(),
-                      children: [
-                        // buildRow([
-                        //   '   ',
-                        //   'Single',
-                        //   'Companion',
-                        //   'Family',
-                        //   'Cremated Remains',
-                        //   'Total'
-                        // ]),
-                      ],
-                    )
-                  ],
-                ),
+            DataTable(columns: <DataColumn>[
+              DataColumn(
+                label: Text(' '),
               ),
-            )
+              DataColumn(
+                label: Text(' '),
+              ),
+              DataColumn(
+                label: Text(' '),
+              ),
+              DataColumn(
+                label: Text(' '),
+              ),
+              DataColumn(
+                label: Text(' '),
+              ),
+
+            ], rows: <DataRow>[])
           ],
         ),
       ),
     );
   }
-
-  // TableRow buildRow(List<String> cells) => TableRow(
-  //   children: cells.map((cell){
-  //     return Padding(
-  //       padding: EdgeInserts.all(12),
-  //       child: Center(child: Text(cell)),
-  //     );
-  //   }
-  // ),
-  // );
-     
 }
