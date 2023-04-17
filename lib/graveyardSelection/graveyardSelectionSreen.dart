@@ -32,7 +32,7 @@ class _GraveyardInDistrictSelectionScreenState extends State<GraveyardInDistrict
           pageTitle: title!,
           showBackArrow: false),
       body: GraveyardInDistrict(),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: user?.role == 'admin' ? FloatingActionButton(
         backgroundColor: Color.fromRGBO(254, 222, 255, 1),
         child: Text(
           '+Add',
@@ -87,8 +87,7 @@ class _GraveyardInDistrictSelectionScreenState extends State<GraveyardInDistrict
                   ),
                   ElevatedButton(
                     child: Text('Save'),
-                    onPressed: () async
-                     {
+                    onPressed: () async {
                       final graveyardRepository = GraveyardRepository();
                       final graveyard = Graveyard(
                           name: name,
@@ -103,20 +102,16 @@ class _GraveyardInDistrictSelectionScreenState extends State<GraveyardInDistrict
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Graveyard added successfully')));
-                          setState(() {
-                            
-                          });
+                      setState(() {});
                     },
-
                   ),
                 ],
-
               );
             },
           );
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      ),
+      ) : null,
     );
   }
 }

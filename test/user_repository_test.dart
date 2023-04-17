@@ -36,7 +36,7 @@ void main() {
       // Arrange
       // final user = User(username: 'emp', password: 'employee', role: 'employee');
       // final user = User(username: 'newuser', password: 'newpassword', role: 'admin');
-      final user = User(username: 'neweruser', password: 'newerpassword', role: 'employee');
+      final user = User(username: 'admin2', password: 'admin2password', role: 'admin');
       // Act
       await userRepository.saveUser(user);
 

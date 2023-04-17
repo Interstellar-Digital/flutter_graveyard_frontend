@@ -8,7 +8,7 @@ const String baseUrl = 'https://graveyard-api.onrender.com/api';
 //const String baseUrl = 'http://localhost:8080/api';
 
 class GraveyardRepository {
-  Future<List<Graveyard>>? getAllGraveyards(String accessToken, String username) async {
+  Future<List<Graveyard>> getAllGraveyards(String accessToken, String username) async {
     final response = await http.get(
       Uri.parse('$baseUrl/graveyards'),
       headers: <String, String>{
@@ -16,14 +16,18 @@ class GraveyardRepository {
         'name': username,
       },
     );
+
     if (response.statusCode == 200) {
       final List<dynamic> responseBody = json.decode(response.body);
       final List<Graveyard> graveyards = responseBody
           .map((dynamic item) => Graveyard.fromJson(item))
           .toList();
+
+      graveyards.sort((a, b) => a.name.compareTo(b.name)); // Sort the list alphabetically by name
+
       return graveyards;
-    } else {
-      throw Exception('Failed to retrieve graveyards: ${response.statusCode}');
+    } else{
+      return []; // Return an empty list if no graveyards were retrieved
     }
   }
 
@@ -39,9 +43,10 @@ class GraveyardRepository {
       final List<Graveyard> graveyards = responseBody
           .map((dynamic item) => Graveyard.fromJson(item))
           .toList();
+      graveyards.sort((a, b) => a.name.compareTo(b.name)); // Sort the list alphabetically by name
       return graveyards;
     } else {
-      throw Exception('Failed to retrieve graveyards: ${response.statusCode}');
+      return []; // Return an empty list if no graveyards were retrieved
     }
   }
 
