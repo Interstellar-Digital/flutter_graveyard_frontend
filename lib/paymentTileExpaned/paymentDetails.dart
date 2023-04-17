@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_graveyard_frontend/paymentTileExpaned/paymentMethod.dart';
 
 class PaymentDetail extends StatelessWidget {
   const PaymentDetail({super.key});
@@ -7,15 +8,8 @@ class PaymentDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-         Text(
-           'Please fill out the information below to make payment *',
-           style: TextStyle(
-             fontSize: 24,
-             decoration: TextDecoration.underline,
-             decorationThickness: 2,
-           ),
-         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               width: 200,
@@ -26,12 +20,18 @@ class PaymentDetail extends StatelessWidget {
               )),
             ),
             SizedBox(
+              width: 20,
+            ),
+            SizedBox(
               width: 200,
               child: TextFormField(
                   decoration: const InputDecoration(
                 border: UnderlineInputBorder(),
                 labelText: 'Middle Name',
               )),
+            ),
+            SizedBox(
+              width: 20,
             ),
             SizedBox(
               width: 200,
@@ -47,6 +47,7 @@ class PaymentDetail extends StatelessWidget {
           height: 30,
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               width: 200,
@@ -57,12 +58,18 @@ class PaymentDetail extends StatelessWidget {
               )),
             ),
             SizedBox(
+              width: 20,
+            ),
+            SizedBox(
               width: 200,
               child: TextFormField(
                   decoration: const InputDecoration(
                 border: UnderlineInputBorder(),
                 labelText: 'Email*',
               )),
+            ),
+            SizedBox(
+              width: 20,
             ),
             SizedBox(
               width: 200,
@@ -78,6 +85,7 @@ class PaymentDetail extends StatelessWidget {
           height: 30,
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               width: 200,
@@ -88,12 +96,18 @@ class PaymentDetail extends StatelessWidget {
               )),
             ),
             SizedBox(
+              width: 20,
+            ),
+            SizedBox(
               width: 200,
               child: TextFormField(
                   decoration: const InputDecoration(
                 border: UnderlineInputBorder(),
                 labelText: 'Plot Number *',
               )),
+            ),
+            SizedBox(
+              width: 20,
             ),
             SizedBox(
               width: 200,
@@ -105,8 +119,20 @@ class PaymentDetail extends StatelessWidget {
             )
           ],
         ),
-         TextButton(onPressed: (){}, child: Text('Coninue')),
-         TextButton(onPressed: (){}, child: Text('Cancel'))
+        SizedBox(
+          height: 30,
+        ),
+        TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: ((context) => PaymentMethodScreen()),
+                ),
+              );
+            },
+            child: Text('Coninue')),
+        TextButton(onPressed: () {}, child: Text('Cancel'))
       ],
     );
   }
