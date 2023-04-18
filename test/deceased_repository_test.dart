@@ -61,6 +61,16 @@ void main() {
       expect(result is List<Deceased>, isTrue);
     });
 
+    test('getDeceasedByGraveyardId', () async {
+
+      // Act
+      final result = await deceasedRepository.getDeceasedByGraveyardId(graveyardID!, accessToken);
+
+      // Assert
+      expect(result, isNotNull);
+      expect(result is List<Deceased>, isTrue);
+    });
+
     test('getAllDeceasedWithInvalidToken', () async {
       // Arrange
       final invalidToken = 'invalid_token';
