@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_graveyard_frontend/navBar/navigationBar.dart';
+import 'package:flutter_graveyard_frontend/notificationTileExpanded/notificationList.dart';
+import 'package:flutter_graveyard_frontend/notificationTileExpanded/notificationSearchbar.dart';
 
 class NotificationScreen extends StatelessWidget {
   final String pageTitle;
@@ -13,13 +15,18 @@ class NotificationScreen extends StatelessWidget {
           onPressCallBack: () {
             Navigator.pop(context);
           },
-          pageTitle: pageTitle,
-          showBackArrow: true),
+          pageTitle: pageTitle),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Nothing here yet'),
+            Padding(
+              padding: const EdgeInsets.only(top: 20, bottom: 40),
+              child: SizedBox(
+                child: NotificationSearch(),
+                width: 800,
+              ),
+            ),
+            NotificationList(),
           ],
         ),
       ),
