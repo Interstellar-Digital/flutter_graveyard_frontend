@@ -13,7 +13,7 @@ class GraveList extends StatefulWidget {
 
 class _GraveListState extends State<GraveList> {
   int _numDeceased = 0;
-  late List<Deceased> deceased; 
+  late List<Deceased> deceased;
 
   @override
   void initState() {
@@ -30,7 +30,6 @@ class _GraveListState extends State<GraveList> {
       }).catchError((error) {
         print("Error: $error");
       });
-      print(deceased);
     });
   }
 
@@ -106,24 +105,6 @@ class _GraveListState extends State<GraveList> {
           ],
         )),
       ]),
-      ...deceased.map((deceased) => DataRow(cells: <DataCell>[
-            DataCell(Text(deceased.name)),
-            DataCell(Text('deceased.plotType')),
-            DataCell(Text('deceased.plotNo')),
-            DataCell(Text('deceased.stay')),
-            DataCell(Text(deceased.dateOfBirth)),
-            DataCell(Text(deceased.dateOfDeath)),
-            DataCell(Text('deceased.isDeceased ?'
-                'Deceased'
-                ':'
-                '')), // Add this to indicate if the deceased is deceased or not
-            DataCell(Row(
-              children: [
-                IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
-                IconButton(onPressed: () {}, icon: Icon(Icons.delete))
-              ],
-            )),
-          ]))
     ]);
   }
 }
