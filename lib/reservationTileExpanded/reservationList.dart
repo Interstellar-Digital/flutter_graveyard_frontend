@@ -2,63 +2,73 @@ import 'package:flutter/material.dart';
 
 class ReservationList extends StatelessWidget {
   ReservationList({super.key});
-
-  final List<String> reservationName = <String>[
-    //make the name lenght constant so it prints to the screen properly
-    'Johnny Test     ',
-    'Marven Gay      ',
-  ];
-  final List<String> reservedPlotType = <String>[
-    'family',
-    'single',
-  ];
-  final List<String> reservedPlotNo = <String>[
-    '155',
-    '190',
-  ];
-  final List<String> contact = <String>[
-    '281-2917',
-    '309-1283',
-  ];
-  final List<String> reservationDate = <String>[
-    '2-10-2023',
-    '4-11-2023',
-  ];
-
+  
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-          child: ListView.builder(
-              itemCount: reservationName.length,
-              itemBuilder: (
-                BuildContext context,
-                int index,
-              ) {
-                return Column(
-                  children: [
-                    Divider(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text('${reservationName[index]}'),
-                        Text('${reservedPlotType[index]}'),
-                        Text('${reservedPlotNo[index]}'),
-                        Text('${contact[index]}'),
-                        Text('${reservationDate[index]}'),
-                        Row(
-                          children: [
-                            IconButton(
-                                onPressed: () {}, icon: Icon(Icons.edit)),
-                            IconButton(
-                                onPressed: () {}, icon: Icon(Icons.delete))
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                );
-              })),
+    TextStyle titles = const TextStyle(
+      fontStyle: FontStyle.italic,
+      fontWeight: FontWeight.bold,
+      fontSize: 24,
     );
+
+    return DataTable(columns: <DataColumn>[
+      DataColumn(
+          label: Text(
+        'Name',
+        style: titles,
+      )),
+      DataColumn(
+          label: Text(
+        'Plot Type',
+        style: titles,
+      )),
+      DataColumn(
+          label: Text(
+        'Plot No.',
+        style: titles,
+      )),
+      DataColumn(
+          label: Text(
+        'Contact',
+        style: titles,
+      )),
+      DataColumn(
+          label: Text(
+        'Reservation',
+        style: titles,
+      )),
+      DataColumn(
+          label: Text(
+        '    ',
+        style: titles,
+      )),
+    ], rows: <DataRow>[
+      DataRow(cells: <DataCell>[
+        DataCell(Text('Johnny Test')),
+        DataCell(Text('family')),
+        DataCell(Text('155')),
+        DataCell(Text('281-2917')),
+        DataCell(Text('2-10-2023')),
+        DataCell(Row(
+          children: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+            IconButton(onPressed: () {}, icon: Icon(Icons.delete))
+          ],
+        ))
+      ]),
+      DataRow(cells: <DataCell>[
+        DataCell(Text('Marven Gay')),
+        DataCell(Text('single')),
+        DataCell(Text('190')),
+        DataCell(Text('309-1283')),
+        DataCell(Text('4-11-2023')),
+        DataCell(Row(
+          children: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+            IconButton(onPressed: () {}, icon: Icon(Icons.delete))
+          ],
+        ))
+      ])
+    ]);
   }
 }
