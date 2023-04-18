@@ -1,7 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_graveyard_frontend/repository/deceased_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class GraveList extends StatelessWidget {
+import '../models/deceased_model.dart';
+
+class GraveList extends StatefulWidget {
   GraveList({super.key});
+
+  @override
+  State<GraveList> createState() => _GraveListState();
+}
+
+class _GraveListState extends State<GraveList> {
+  int _numDeceased = 0;
+  late List<Deceased> deceased; 
+
+  @override
+  void initState() {
+    super.initState();
+    SharedPreferences.getInstance().then((prefs) {
+      final graveyardId = prefs.getString('graveyardID');
+      final accessToken = prefs.getString("accessToken");
+
+      DeceasedRepository().getAllDeceased(accessToken!).then((graves) {
+        setState(() {
+          _numDeceased = graves!.length;
+          deceased = graves;
+        });
+      }).catchError((error) {
+        print("Error: $error");
+      });
+      print(deceased);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +79,7 @@ class GraveList extends StatelessWidget {
       )),
     ], rows: <DataRow>[
       DataRow(cells: <DataCell>[
-        DataCell(Text('John Doe')),
+        DataCell(Text('$_numDeceased')),
         DataCell(Text('family')),
         DataCell(Text('155')),
         DataCell(Text('6')),
@@ -75,6 +106,24 @@ class GraveList extends StatelessWidget {
           ],
         )),
       ]),
+      ...deceased.map((deceased) => DataRow(cells: <DataCell>[
+            DataCell(Text(deceased.name)),
+            DataCell(Text('deceased.plotType')),
+            DataCell(Text('deceased.plotNo')),
+            DataCell(Text('deceased.stay')),
+            DataCell(Text(deceased.dateOfBirth)),
+            DataCell(Text(deceased.dateOfDeath)),
+            DataCell(Text('deceased.isDeceased ?'
+                'Deceased'
+                ':'
+                '')), // Add this to indicate if the deceased is deceased or not
+            DataCell(Row(
+              children: [
+                IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                IconButton(onPressed: () {}, icon: Icon(Icons.delete))
+              ],
+            )),
+          ]))
     ]);
   }
 }
