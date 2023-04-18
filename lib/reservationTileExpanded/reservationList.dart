@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ReservationList extends StatelessWidget {
   ReservationList({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     TextStyle titles = const TextStyle(
