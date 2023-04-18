@@ -6,35 +6,42 @@ import 'package:flutter_graveyard_frontend/reportTileExpanded/reportScreen.dart'
 import 'package:flutter_graveyard_frontend/reservationTileExpanded/reservationScreen.dart';
 import '../burialTileExpanded/burialsScreen.dart';
 
-class GraveyardDashboardTiles extends StatelessWidget {
+class GraveyardDashboardTiles extends StatefulWidget {
   const GraveyardDashboardTiles({Key? key});
 
   @override
+  GraveyardDashboardTilesState createState() =>
+      GraveyardDashboardTilesState();
+}
+
+class GraveyardDashboardTilesState extends State<GraveyardDashboardTiles> {
+  final List<String> items = [
+    'Graves',
+    'Burials',
+    'Reservations',
+    'Report',
+    'Payments',
+    'Notifications',
+  ];
+  final List<String> images = [
+    'assets/graves.png',
+    'assets/openGraves.png',
+    'assets/reservedGraves.png',
+    'assets/report.png',
+    'assets/payment.png',
+    'assets/notification.png',
+  ];
+  final List<String> routes = [
+    '/graves',
+    '/burials',
+    '/reservations',
+    '/report',
+    '/payments',
+    '/notifications',
+  ];
+
+  @override
   Widget build(BuildContext context) {
-    final List<String> items = [
-      'Graves',
-      'Burials',
-      'Reservations',
-      'Report',
-      'Payments',
-      'Notifications',
-    ];
-    final List<String> images = [
-      'assets/graves.png',
-      'assets/openGraves.png',
-      'assets/reservedGraves.png',
-      'assets/report.png',
-      'assets/payment.png',
-      'assets/notification.png',
-    ];
-    final List<String> routes = [
-      '/graves',
-      '/burials',
-      '/reservations',
-      '/report',
-      '/payments',
-      '/notifications',
-    ];
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: MediaQuery.of(context).size.width * 0.15,

@@ -16,23 +16,36 @@ class GraveyardInDistrictSelectionScreen extends StatefulWidget {
 }
 
 class _GraveyardInDistrictSelectionScreenState extends State<GraveyardInDistrictSelectionScreen> {
+  late String _accessToken;
+  late String _userID;
+
+  @override
+  void initState() {
+    super.initState();
+    SharedPreferences.getInstance().then((prefs) {
+      setState(() {
+        _accessToken = prefs.getString('accessToken') ?? '';
+        _userID = prefs.getString('userID') ?? '';
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
     final title = userProvider.pageTitle;
-    SharedPreferences.getInstance().then((prefs) {
-      final accessToken = prefs.getString('accessToken') ?? '';
-      final userID = prefs.getString('userID') ?? '';
-    });
+
     return Scaffold(
       appBar: NavBar(
-          context: context,
-          onPressCallBack: () {},
-          pageTitle: title!,
-          showBackArrow: false),
+        context: context,
+        onPressCallBack: () {},
+        pageTitle: title!,
+        showBackArrow: false,
+      ),
       body: GraveyardInDistrict(),
-      floatingActionButton: user?.role == 'admin' ? FloatingActionButton(
+      floatingActionButton: user?.role == 'admin'
+          ? FloatingActionButton(
         backgroundColor: Color.fromRGBO(254, 222, 255, 1),
         child: Text(
           '+Add',
@@ -90,18 +103,22 @@ class _GraveyardInDistrictSelectionScreenState extends State<GraveyardInDistrict
                     onPressed: () async {
                       final graveyardRepository = GraveyardRepository();
                       final graveyard = Graveyard(
-                          name: name,
-                          location: location,
-                          numberOfPlots: maxPlots);
-                      SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                      final accessToken = prefs.getString('accessToken') ?? '';
-                      final userID = prefs.getString('userID') ?? '';
+                        name: name,
+                        location: location,
+                        numberOfPlots: maxPlots,
+                      );
                       await graveyardRepository.saveGraveyard(
-                          graveyard, userID, accessToken);
+                        graveyard,
+                        _userID,
+                        _accessToken,
+                      );
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Graveyard added successfully')));
+                        SnackBar(
+                          content:
+                          Text('Graveyard added successfully'),
+                        ),
+                      );
                       setState(() {});
                     },
                   ),
@@ -110,8 +127,11 @@ class _GraveyardInDistrictSelectionScreenState extends State<GraveyardInDistrict
             },
           );
         },
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      ) : null,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+
+      ) : Container(),
     );
   }
 }
